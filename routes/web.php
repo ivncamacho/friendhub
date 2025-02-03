@@ -3,12 +3,14 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+/**Route::get('/', function () {
     return view('welcome');
-});
-Route::get('/testing', function () {
-    return view('index');
-});
+});*/
+Route::view('/', 'index')->name('index');
+
+Route::get('/feed', function () {
+    return view('feed.mainPage');
+})->middleware(['auth', 'verified'])->name('feed');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
