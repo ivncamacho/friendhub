@@ -2,40 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FriendHub</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo.png') }}" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="{{ asset('public/css/styles.css') }}" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body id="page-top" style="background-color: #022133">
+<body class="bg-[#022133] text-white">
 
 <!-- Incluir el componente Navbar -->
 <x-navbar />
 
-<!-- Aquí va el resto de tu contenido -->
-<section class="page-section" id="services">
-    <div class="container">
-        <div class="text-center">
-            <h2 class="section-heading text-uppercase">Services</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+<!-- Sección Services -->
+<section id="services" class="py-16">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold uppercase">Services</h2>
+            <h3 class="text-gray-400 text-lg">Lorem ipsum dolor sit amet consectetur.</h3>
         </div>
-        <div class="row text-center">
-            <div class="col-md-6">
-                <h4 class="my-3">E-Commerce</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+            <div class="p-6 bg-gray-800 rounded-lg shadow-lg">
+                <h4 class="text-xl font-semibold mb-3">E-Commerce</h4>
+                <p class="text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
             </div>
-            <div class="col-md-6">
-                <h4 class="my-3">Responsive Design</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+            <div class="p-6 bg-gray-800 rounded-lg shadow-lg">
+                <h4 class="text-xl font-semibold mb-3">Responsive Design</h4>
+                <p class="text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
             </div>
         </div>
     </div>
 </section>
-
-<!-- Scripts Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
 
 </body>
 </html>
