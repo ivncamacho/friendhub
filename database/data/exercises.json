@@ -1,0 +1,227 @@
+[
+    {
+        "title": "Push-up",
+        "description": "Push-ups are a basic exercise that targets the chest, shoulders, and triceps. They can be done anywhere and require no equipment.",
+        "media": "push-up.jpg"
+    },
+    {
+        "title": "Squat",
+        "description": "Squats are a lower body exercise that target the quads, hamstrings, and glutes. They can be performed with body weight or added resistance.",
+        "media": "squat.jpg"
+    },
+    {
+        "title": "Lunges",
+        "description": "Lunges are a great exercise for targeting the legs and glutes, helping to improve balance and strength.",
+        "media": "lunges.jpg"
+    },
+    {
+        "title": "Plank",
+        "description": "Planks are an isometric exercise that engages the core muscles, helping to improve strength and stability.",
+        "media": "plank.jpg"
+    },
+    {
+        "title": "Deadlift",
+        "description": "Deadlifts target the posterior chain, including the back, glutes, and hamstrings, and are great for building overall strength.",
+        "media": "deadlift.jpg"
+    },
+    {
+        "title": "Bench Press",
+        "description": "The bench press targets the chest, shoulders, and triceps, and is a staple exercise for building upper body strength.",
+        "media": "bench-press.jpg"
+    },
+    {
+        "title": "Bicep Curl",
+        "description": "Bicep curls isolate the biceps, helping to build muscle in the upper arms.",
+        "media": "bicep-curl.jpg"
+    },
+    {
+        "title": "Tricep Dips",
+        "description": "Tricep dips are a bodyweight exercise that target the triceps, shoulders, and chest.",
+        "media": "tricep-dips.jpg"
+    },
+    {
+        "title": "Shoulder Press",
+        "description": "The shoulder press targets the shoulders, specifically the deltoid muscles, and can be done with dumbbells or a barbell.",
+        "media": "shoulder-press.jpg"
+    },
+    {
+        "title": "Pull-up",
+        "description": "Pull-ups are a classic upper body exercise that targets the back, biceps, and shoulders.",
+        "media": "pull-up.jpg"
+    },
+    {
+        "title": "Chin-up",
+        "description": "Chin-ups are similar to pull-ups but with an underhand grip, placing more emphasis on the biceps.",
+        "media": "chin-up.jpg"
+    },
+    {
+        "title": "Leg Press",
+        "description": "The leg press machine targets the quads, hamstrings, and glutes, offering a controlled leg workout.",
+        "media": "leg-press.jpg"
+    },
+    {
+        "title": "Leg Curl",
+        "description": "Leg curls specifically target the hamstrings and are often done on a machine.",
+        "media": "leg-curl.jpg"
+    },
+    {
+        "title": "Leg Extension",
+        "description": "Leg extensions focus on the quads, helping to build strength and definition in the front of the legs.",
+        "media": "leg-extension.jpg"
+    },
+    {
+        "title": "Mountain Climbers",
+        "description": "Mountain climbers are a dynamic bodyweight exercise that targets the core, shoulders, and legs while also providing a cardio challenge.",
+        "media": "mountain-climbers.jpg"
+    },
+    {
+        "title": "Jumping Jacks",
+        "description": "Jumping jacks are a full-body exercise that increase cardiovascular endurance and work various muscle groups.",
+        "media": "jumping-jacks.jpg"
+    },
+    {
+        "title": "Burpees",
+        "description": "Burpees are a high-intensity exercise that targets the entire body, combining a squat, push-up, and jump.",
+        "media": "burpees.jpg"
+    },
+    {
+        "title": "Russian Twists",
+        "description": "Russian twists are a great exercise for working the obliques and improving core strength.",
+        "media": "russian-twists.jpg"
+    },
+    {
+        "title": "Sit-ups",
+        "description": "Sit-ups are a classic abdominal exercise that primarily target the rectus abdominis muscles.",
+        "media": "sit-ups.jpg"
+    },
+    {
+        "title": "Crunches",
+        "description": "Crunches are a common core exercise that target the abdominal muscles with a focus on the upper abs.",
+        "media": "crunches.jpg"
+    },
+    {
+        "title": "Superman",
+        "description": "The Superman exercise targets the lower back, glutes, and shoulders by lifting the arms and legs off the ground.",
+        "media": "superman.jpg"
+    },
+    {
+        "title": "Glute Bridge",
+        "description": "The glute bridge works the glutes, hamstrings, and lower back by lifting the hips off the floor while lying on your back.",
+        "media": "glute-bridge.jpg"
+    },
+    {
+        "title": "Kettlebell Swing",
+        "description": "The kettlebell swing targets the hips, glutes, and core while providing a great cardiovascular workout.",
+        "media": "kettlebell-swing.jpg"
+    },
+    {
+        "title": "Clean and Press",
+        "description": "The clean and press is a full-body movement that targets the legs, back, shoulders, and arms.",
+        "media": "clean-and-press.jpg"
+    },
+    {
+        "title": "Seated Row",
+        "description": "The seated row targets the back muscles, specifically the lats and rhomboids, and can be done using a cable machine.",
+        "media": "seated-row.jpg"
+    },
+    {
+        "title": "Lat Pulldown",
+        "description": "The lat pulldown primarily targets the latissimus dorsi muscles in the back, helping to build width and strength.",
+        "media": "lat-pulldown.jpg"
+    },
+    {
+        "title": "Cable Tricep Pushdown",
+        "description": "The cable tricep pushdown isolates the triceps and can be performed using a cable machine.",
+        "media": "cable-tricep-pushdown.jpg"
+    },
+    {
+        "title": "Cable Bicep Curl",
+        "description": "Cable bicep curls target the biceps and provide constant tension throughout the movement.",
+        "media": "cable-bicep-curl.jpg"
+    },
+    {
+        "title": "Chest Fly",
+        "description": "Chest flies are an isolation exercise that target the chest muscles, performed with dumbbells or on a machine.",
+        "media": "chest-fly.jpg"
+    },
+    {
+        "title": "Dumbbell Row",
+        "description": "Dumbbell rows target the upper back, lats, and rear shoulders, and can be performed one arm at a time.",
+        "media": "dumbbell-row.jpg"
+    },
+    {
+        "title": "T-Bar Row",
+        "description": "T-Bar rows are a compound exercise that target the back, shoulders, and arms.",
+        "media": "t-bar-row.jpg"
+    },
+    {
+        "title": "Cable Chest Press",
+        "description": "The cable chest press is an alternative to the bench press and targets the chest and triceps using a cable machine.",
+        "media": "cable-chest-press.jpg"
+    },
+    {
+        "title": "Face Pull",
+        "description": "Face pulls target the rear deltoids and upper traps, helping to improve posture and shoulder health.",
+        "media": "face-pull.jpg"
+    },
+    {
+        "title": "Hip Thrust",
+        "description": "Hip thrusts focus on the glutes and hamstrings, and are great for building lower body strength.",
+        "media": "hip-thrust.jpg"
+    },
+    {
+        "title": "Barbell Row",
+        "description": "Barbell rows are a compound back exercise that target the lats, rhomboids, and rear deltoids.",
+        "media": "barbell-row.jpg"
+    },
+    {
+        "title": "Box Jump",
+        "description": "Box jumps are a plyometric exercise that target the legs and improve explosive power.",
+        "media": "box-jump.jpg"
+    },
+    {
+        "title": "Sumo Squat",
+        "description": "Sumo squats are a variation of the squat that target the inner thighs, glutes, and quads.",
+        "media": "sumo-squat.jpg"
+    },
+    {
+        "title": "Calf Raise",
+        "description": "Calf raises target the calf muscles and can be performed standing or seated.",
+        "media": "calf-raise.jpg"
+    },
+    {
+        "title": "Farmer's Walk",
+        "description": "The farmer's walk is a full-body exercise that targets the grip, shoulders, back, and legs.",
+        "media": "farmers-walk.jpg"
+    },
+    {
+        "title": "Jump Rope",
+        "description": "Jump rope is a cardiovascular exercise that helps to improve coordination and endurance while also toning the legs.",
+        "media": "jump-rope.jpg"
+    },
+    {
+        "title": "Medicine Ball Slam",
+        "description": "Medicine ball slams are a high-intensity full-body exercise that helps to build strength and cardiovascular fitness.",
+        "media": "medicine-ball-slam.jpg"
+    },
+    {
+        "title": "Boxing",
+        "description": "Boxing is a combat sport that improves strength, endurance, and coordination while providing a great cardiovascular workout.",
+        "media": "boxing.jpg"
+    },
+    {
+        "title": "Plyometric Push-up",
+        "description": "Plyometric push-ups are a variation of the push-up that involve explosive movement, helping to build power in the chest and arms.",
+        "media": "plyometric-push-up.jpg"
+    },
+    {
+        "title": "Turkish Get-up",
+        "description": "The Turkish get-up is a full-body exercise that targets the core, shoulders, and legs, requiring a kettlebell or dumbbell.",
+        "media": "turkish-get-up.jpg"
+    },
+    {
+        "title": "Battle Rope Waves",
+        "description": "Battle rope waves are a high-intensity exercise that improves cardiovascular fitness and targets the arms and shoulders.",
+        "media": "battle-rope-waves.jpg"
+    }
+]

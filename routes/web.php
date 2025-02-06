@@ -13,7 +13,8 @@ Route::get('/feed', function () {
 })->middleware(['auth', 'verified'])->name('feed');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('
+    dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/myworkouts', function () {
