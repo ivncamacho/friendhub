@@ -22,6 +22,7 @@ class Exercise extends Model
         'title',
         'description',
         'media',
+        'youtube_video_id',
     ];
     public function posts(): BelongsToMany
     {

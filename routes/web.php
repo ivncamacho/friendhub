@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +12,11 @@ Route::view('/', 'index')->name('index');
 Route::get('/feed', function () {
     return view('feed.mainPage');
 })->middleware(['auth', 'verified'])->name('feed');
+
+Route::get('/famous-workouts', [ExerciseController::class, 'index'])
+    ->name('famous-workouts');
+
+Route::get('/exercise/{id}', [ExerciseController::class, 'show'])->name('exercise.show');
 
 Route::get('/dashboard', function () {
     return view('

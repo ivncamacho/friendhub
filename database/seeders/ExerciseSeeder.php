@@ -17,6 +17,7 @@ class ExerciseSeeder extends Seeder
                 'title' => $exercise['title'],
                 'description' => $exercise['description'],
                 'media' => $exercise['media'],
+                'youtube_video_id' => $exercise['youtube_video_id'],
             ]);
         }
     }

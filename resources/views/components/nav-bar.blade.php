@@ -19,10 +19,17 @@
         <!-- Menú Principal con fondo diferente y bordes redondeados -->
             @auth
             <div class="hidden md:flex space-x-6 uppercase text-lg font-semibold tracking-wide bg-[#023e58] p-4 rounded-lg">
-            <a href="{{ route('index') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Inicio</a>
+                <a href="{{ route('index') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Inicio</a>
                 <a href="{{ route('feed') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Feed</a>
-        </div>
+                <a href="{{ route('famous-workouts') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Ejercicios Comunes</a>
+
+            </div>
             @endauth
+            @guest
+                <div class="hidden md:flex space-x-6 uppercase text-lg font-semibold tracking-wide bg-[#023e58] p-4 rounded-lg">
+                    <a href="{{ route('famous-workouts') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Ejercicios Comunes</a>
+                </div>
+            @endguest
 
 
         <!-- Dropdown Autenticación con fondo diferente y bordes redondeados -->
