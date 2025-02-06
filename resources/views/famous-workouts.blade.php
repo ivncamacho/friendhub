@@ -19,12 +19,11 @@
         <!-- Lista de ejercicios comunes -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             @foreach ($exercises as $exercise)
-                <a href="{{ route('exercise.show', $exercise->id) }}" class="bg-[#033047] p-6 rounded-lg shadow-lg block">
+                <a href="{{ route('exercise.show', $exercise->id) }}" class="bg-[#033047] p-6 rounded-lg shadow-lg block transform transition-transform duration-300 hover:scale-105 hover:bg-[#044766]">
                     <h2 class="text-xl font-semibold text-white mb-4">{{ $exercise->title }}</h2>
                     <img src="{{ asset('assets/img/exercises/' . $exercise->media) }}" alt="Imagen de {{ $exercise->title }}" class="w-full h-48 object-cover rounded mb-4">
                 </a>
             @endforeach
-
         </div>
 
         <!-- Paginación -->

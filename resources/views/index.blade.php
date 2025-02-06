@@ -1,36 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>FriendHub</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo.png') }}" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Página de Inicio - FriendHub</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="bg-[#022133] text-white">
 
-<!-- Incluir el componente Navbar -->
-<x-navbar />
+<x-nav-bar />
 
-<!-- Sección Services -->
-<section id="services" class="py-16">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold uppercase">Services</h2>
-            <h3 class="text-gray-400 text-lg">Lorem ipsum dolor sit amet consectetur.</h3>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
-            <div class="p-6 bg-gray-800 rounded-lg shadow-lg">
-                <h4 class="text-xl font-semibold mb-3">E-Commerce</h4>
-                <p class="text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+<!-- Contenido principal -->
+<div class="pt-24 pb-12 bg-[#022133]">
+    <div class="container mx-auto px-4 text-center">
+        @auth
+            <h1 class="text-3xl font-bold mb-4">Bienvenido/a de nuevo, {{ Auth::user()->name }}!</h1>
+            <p class="text-lg mb-8">Nos alegra verte nuevamente. Explora las últimas novedades y mantente conectado con tus amigos.</p>
+            <!-- Botón para ver el feed de noticias -->
+            <a href="{{ route('feed') }}" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition-transform transform hover:scale-105">
+                Ir al Feed de Noticias
+            </a>
+        @else
+            <h1 class="text-3xl font-bold mb-4">Bienvenido/a a FriendHub</h1>
+            <p class="text-lg mb-8">Conéctate con amigos, comparte momentos y descubre nuevas comunidades.</p>
+            <!-- Botones de registro e inicio de sesión -->
+            <div class="space-x-4">
+                <a href="{{ route('register') }}" class="inline-block bg-green-500 text-white font-semibold py-2 px-4 rounded-lg transition-transform transform hover:scale-105">
+                    Regístrate
+                </a>
+                <a href="{{ route('login') }}" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition-transform transform hover:scale-105">
+                    Inicia Sesión
+                </a>
             </div>
-            <div class="p-6 bg-gray-800 rounded-lg shadow-lg">
-                <h4 class="text-xl font-semibold mb-3">Responsive Design</h4>
-                <p class="text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-            </div>
-        </div>
+        @endauth
     </div>
-</section>
+</div>
 
 </body>
 </html>
