@@ -22,12 +22,14 @@
         <div>
             <label class="block text-gray-700">Correo Electrónico</label>
             <input type="email" name="email" required class="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Contraseña -->
         <div class="mt-4">
             <label class="block text-gray-700">Contraseña</label>
             <input type="password" name="password" required class="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <!-- Recordarme -->

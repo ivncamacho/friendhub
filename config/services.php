@@ -34,5 +34,10 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-
+    /**
+    'api_ninja' => [
+        'key' => env('API_NINJA_KEY'),
+        'url' => 'https://api.api-ninjas.com/v1/exercises',
+    ],
+     */
 ];

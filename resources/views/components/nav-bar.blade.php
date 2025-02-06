@@ -16,16 +16,17 @@
             <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" class="h-12 rounded-full">
         </a>
 
-        <!-- Menú Principal -->
-        <div class="hidden md:flex space-x-6 uppercase text-lg font-semibold tracking-wide">
+        <!-- Menú Principal con fondo diferente y bordes redondeados -->
             @auth
-                <a href="{{ route('index') }}" class="hover:text-gray-400 transition-colors">Inicio</a>
-                <a href="{{ route('feed') }}" class="hover:text-gray-400 transition-colors">Feed</a>
-            @endauth
+            <div class="hidden md:flex space-x-6 uppercase text-lg font-semibold tracking-wide bg-[#023e58] p-4 rounded-lg">
+            <a href="{{ route('index') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Inicio</a>
+                <a href="{{ route('feed') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Feed</a>
         </div>
+            @endauth
 
-        <!-- Dropdown Autenticación -->
-        <div x-data="{ open: false }" class="relative">
+
+        <!-- Dropdown Autenticación con fondo diferente y bordes redondeados -->
+        <div x-data="{ open: false }" class="relative bg-[#023e58] p-4 rounded-lg">
             <button @click="open = !open" class="uppercase hover:text-gray-400 focus:outline-none text-lg font-semibold transition-colors">
                 @auth
                     {{ Auth::user()->name }}
@@ -47,21 +48,6 @@
                     <a href="{{ route('login') }}" class="block px-4 py-2 hover:bg-gray-200">Iniciar Sesión</a>
                 @endauth
             </div>
-        </div>
-
-        <!-- Botón menú móvil -->
-        <button @click="openMobile = !openMobile" class="md:hidden focus:outline-none" x-data="{ openMobile: false }">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-        </button>
-
-        <!-- Menú móvil -->
-        <div x-show="openMobile" @click.away="openMobile = false" class="absolute fixed-top top-20 left-0 w-full bg-[#01121c] text-center py-4 shadow-lg md:hidden">
-            @auth
-                <a href="{{ route('index') }}" class="block py-2 text-lg font-semibold hover:text-gray-400 transition-colors">Inicio</a>
-                <a href="{{ route('feed') }}" class="block py-2 text-lg font-semibold hover:text-gray-400 transition-colors">Feed</a>
-            @endauth
         </div>
     </div>
 </nav>
