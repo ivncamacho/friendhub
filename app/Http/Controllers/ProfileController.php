@@ -33,7 +33,7 @@ class ProfileController extends Controller
         if ($request->has('profile_photo')) {
             // Eliminar la imagen anterior si existe
             if ($user->profile_photo && Storage::exists('profile_images/' . $user->profile_photo)) {
-                Storage::delete('profile_images/' . $user->profile_photo);
+                Storage::unlink('profile_images/' . $user->profile_photo);
             }
 
             // Guardar la imagen
