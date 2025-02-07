@@ -27,9 +27,20 @@ Route::get('/myworkouts', function () {
     return view('myworkouts');
 })->middleware(['auth', 'verified'])->name('myworkouts');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+/**Route::middleware('auth')->group(function () {
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/upload', [ProfileController::class, 'upload'])->name('profile.upload');
 });
+*/
+Route::middleware('auth')->group(function () {
+
+// Ruta para ver el formulario de edición del perfil
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+// Ruta para actualizar los datos del perfil
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+// Ruta para eliminar la foto de perfil
+    Route::delete('/profile/destroy', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
 require __DIR__.'/auth.php';

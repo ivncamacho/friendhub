@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('exercise', function (Blueprint $table) {
-            $table->string('youtube_video_id')->nullable(); // Para almacenar solo el ID del video de YouTube
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('profile_photo')->nullable();
         });
     }
 
@@ -22,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('exercises', function (Blueprint $table) {
-            $table->dropColumn('youtube_video_id');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('profile_photo');
         });
     }
 };

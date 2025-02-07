@@ -17,26 +17,25 @@
         </a>
 
         <!-- Menú Principal con fondo diferente y bordes redondeados -->
-            @auth
+        @auth
             <div class="hidden md:flex space-x-6 uppercase text-lg font-semibold tracking-wide bg-[#023e58] p-4 rounded-lg">
                 <a href="{{ route('index') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Inicio</a>
                 <a href="{{ route('feed') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Feed</a>
                 <a href="{{ route('famous-workouts') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Ejercicios Comunes</a>
-
             </div>
-            @endauth
+        @endauth
+
         @guest
             <div class="hidden md:flex space-x-6 uppercase text-lg font-semibold tracking-wide bg-[#023e58] p-4 rounded-lg">
                 <a href="{{ route('famous-workouts') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Ejercicios Comunes</a>
             </div>
         @endguest
 
-
-
         <!-- Dropdown Autenticación con fondo diferente y bordes redondeados -->
         <div x-data="{ open: false }" class="relative bg-[#023e58] p-4 rounded-lg">
             <button @click="open = !open" class="uppercase hover:text-gray-400 focus:outline-none text-lg font-semibold transition-colors">
                 @auth
+                    <img src="{{ Auth::user()->profile_photo ? asset('profile_images/' . Auth::user()->profile_photo) : asset('profile_images/default-profile.jpg') }}" alt="Foto de perfil" class="w-10 h-10 rounded-full inline-block mr-2">
                     {{ Auth::user()->name }}
                 @else
                     Entra
