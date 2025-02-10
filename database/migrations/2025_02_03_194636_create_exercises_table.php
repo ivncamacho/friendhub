@@ -9,21 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::table('exercise', function (Blueprint $table) {
-            $table->string('youtube_video_id')->nullable(); // Para almacenar solo el ID del video de YouTube
+        Schema::create('exercises', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->string('media')->nullable();
+            $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('exercises', function (Blueprint $table) {
-            $table->dropColumn('youtube_video_id');
-        });
+        Schema::dropIfExists('exercises');
     }
 };

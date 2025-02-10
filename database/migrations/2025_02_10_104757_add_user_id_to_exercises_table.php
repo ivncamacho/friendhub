@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('exercise', function (Blueprint $table) {
+        Schema::table('exercises', function (Blueprint $table) {
             $table->foreignId('user_id')->default(1)->constrained('users')->onDelete('cascade');
         });
     }
 
     public function down()
     {
-        Schema::table('exercise', function (Blueprint $table) {
+        Schema::table('exercises', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
         });

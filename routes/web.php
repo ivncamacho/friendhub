@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WorkoutController;
 use Illuminate\Support\Facades\Route;
 
 /**Route::get('/', function () {
@@ -10,9 +11,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index')->name('index');
 
-Route::get('/feed', function () {
-    return view('feed.mainPage');
-})->middleware(['auth', 'verified'])->name('feed');
+
+Route::get('/feed', [WorkoutController::class, 'index'])->name('feed');
+Route::get('/workout/{id}', [WorkoutController::class, 'show'])->name('workout.show');
+Route::get('/workout/create', [WorkoutController::class, 'create'])->name('workout.create');
+Route::post('/workout', [WorkoutController::class, 'store'])->name('workout.store');
 
 Route::get('/famous-workouts', [ExerciseController::class, 'index'])
     ->name('famous-workouts');

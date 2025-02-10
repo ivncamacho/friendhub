@@ -17,7 +17,7 @@ class Exercise extends Model
      * @var list<string>
      */
 
-    protected $table = 'exercise';
+    protected $table = 'exercises';
     protected $fillable = [
         'title',
         'description',
@@ -25,12 +25,12 @@ class Exercise extends Model
         'youtube_video_id',
         'user_id',
     ];
-    public function posts(): BelongsToMany
-    {
-        return $this->belongsToMany(Post::class);
-    }
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    public function workouts()
+    {
+        return $this->belongsToMany(Workout::class, 'workout_exercise')->withTimestamps();
     }
 }
