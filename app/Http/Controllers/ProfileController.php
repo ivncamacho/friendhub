@@ -18,59 +18,56 @@ class ProfileController extends Controller
     // Actualizar datos del perfil
     public function update(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
+        // Validación
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:users,name,' . auth()->id(),
             'email' => 'required|string|email|max:255|unique:users,email,' . auth()->id(),
             'password' => 'nullable|string|min:8|confirmed',
-            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        // Obtener el usuario autenticado
         $user = auth()->user();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $imagePath = 'profile_images/' . $user->profile_photo;
-        // Procesar la imagen si se ha subido
+
+        // Actualizar nombre y email
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+
+        // Manejo de la foto de perfil
         if ($request->has('profile_photo')) {
-            // Eliminar la imagen anterior si existe
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
+            // Eliminar la foto anterior si existe
+            if ($user->profile_photo) {
+                Storage::delete('profile_images/' . $user->profile_photo);
             }
 
-            // Guardar la imagen
-            $imageName = time() . '.' . $request->profile_photo->extension();
-            $request->profile_photo->move(public_path('profile_images/'), $imageName);
-
-            // Guardar en la base de datos
-            $user->profile_photo = $imageName;
+            // Subir la nueva foto
+            $imagePath = $request->file('profile_photo')->store('profile_images', 'public');
+            $user->profile_photo = basename($imagePath);
         }
 
-
+        // Actualizar la contraseña si se proporciona
         if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
+            $user->password = Hash::make($validated['password']);
         }
 
+        // Guardar los cambios
         $user->save();
 
-        // Redirigir al dashboard con un mensaje de éxito
+        // Redirigir con mensaje de éxito
         return redirect()->route('dashboard')->with('success', 'Cambios efectuados correctamente');
     }
 
-
-
     // Metodo para eliminar la foto de perfil
-    public function destroy(Request $request)
+    public function destroy()
     {
         $user = auth()->user();
-        $imagePath = 'profile_images/' . $user->profile_photo;
-        // Verificar si el usuario tiene una foto de perfil
-        if ($user->profile_photo != null) {
 
-            // Verificar si la imagen existe en la carpeta y eliminarla
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
-            }
+        // Verificar si tiene foto de perfil
+        if ($user->profile_photo) {
+            // Eliminar la imagen del almacenamiento
+            Storage::delete('profile_images/' . $user->profile_photo);
 
-            // Restablecer el campo de la foto de perfil en la base de datos
+            // Restablecer la foto en la base de datos
             $user->profile_photo = null;
             $user->save();
 
@@ -79,5 +76,4 @@ class ProfileController extends Controller
 
         return redirect()->route('dashboard')->with('error', 'No se encontró ninguna foto de perfil para eliminar.');
     }
-
 }

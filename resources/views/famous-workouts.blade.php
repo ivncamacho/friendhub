@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ejercicios Comunes - FriendHub</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>

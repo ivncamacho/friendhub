@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - FriendHub</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Animación de aparición y desaparición de la notificación */

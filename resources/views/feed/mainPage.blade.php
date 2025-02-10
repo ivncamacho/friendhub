@@ -1,6 +1,8 @@
 <html>
 <head>
     <title>FriendHub</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
 </head>
 <body>
