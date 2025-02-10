@@ -13,14 +13,18 @@ Route::view('/', 'index')->name('index');
 
 
 Route::get('/feed', [WorkoutController::class, 'index'])->name('feed');
-Route::get('/workout/{id}', [WorkoutController::class, 'show'])->name('workout.show');
-Route::get('/workout/create', [WorkoutController::class, 'create'])->name('workout.create');
-Route::post('/workout', [WorkoutController::class, 'store'])->name('workout.store');
+Route::get('/workouts/create', [WorkoutController::class, 'create'])->name('workouts.create');
+Route::get('/workouts/{id}', [WorkoutController::class, 'show'])->name('workouts.show');
+Route::post('/workouts', [WorkoutController::class, 'store'])->name('workouts.store');
+
+
 
 Route::get('/famous-workouts', [ExerciseController::class, 'index'])
     ->name('famous-workouts');
-
 Route::get('/exercise/{id}', [ExerciseController::class, 'show'])->name('exercise.show');
+
+
+
 
 Route::get('/dashboard', function () {
     return view('

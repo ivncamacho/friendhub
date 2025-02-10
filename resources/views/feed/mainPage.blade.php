@@ -13,10 +13,9 @@
 <!-- Espaciado para evitar que el contenido se solape con la barra de navegación -->
 <div class="mt-20 container mx-auto">
     <!-- Botón para añadir entrenamiento centrado -->
-    <div class="flex justify-center mb-6">
-        <a href="{{ route('workout.create') }}"
-           class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-            Añadir Entrenamiento
+    <div class="text-center mb-8">
+        <a href="{{ route('workouts.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
+            Añadir Nuevo Ejercicio
         </a>
     </div>
 
@@ -24,7 +23,7 @@
     <div class="mt-6">
         @foreach($workouts as $workout)
             <div class="bg-white shadow-md rounded-lg p-4 mb-4">
-                <a href="{{ route('workout.show', $workout->id) }}" class="text-lg font-bold text-blue-600">
+                <a href="{{ route('workouts.show', $workout->id) }}" class="text-lg font-bold text-blue-600">
                     {{ $workout->title }}
                 </a>
                 <p class="text-gray-600">Creado por: {{ $workout->user->name }}</p>

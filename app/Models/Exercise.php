@@ -29,7 +29,7 @@ class Exercise extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function workouts()
+    public function workouts(): BelongsToMany
     {
         return $this->belongsToMany(Workout::class, 'workout_exercise')->withTimestamps();
     }

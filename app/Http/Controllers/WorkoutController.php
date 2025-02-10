@@ -18,14 +18,16 @@ class WorkoutController extends Controller
     public function show($id)
     {
         $workout = Workout::with('exercises', 'user')->findOrFail($id);
-        return view('workout.show', compact('workout'));
+        return view('workouts.show', compact('workout'));
     }
 
     public function create()
     {
         $exercises = Exercise::all();
-        return view('workout.create', compact('exercises'));
+
+        return view('workouts.create', compact('exercises'));
     }
+
 
     public function store(Request $request)
     {
@@ -42,6 +44,6 @@ class WorkoutController extends Controller
 
         $workout->exercises()->attach($request->exercises);
 
-        return redirect()->route('feed.mainPage')->with('status', 'Entrenamiento creado con éxito.');
+        return redirect()->route('feed')->with('status', 'Entrenamiento creado con éxito.');
     }
 }

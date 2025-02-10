@@ -56,7 +56,7 @@ class ExerciseController extends Controller
 
     public function create()
     {
-        return view('exercise.create'); // Asegúrate de crear esta vista
+        return view('exercise.create');
     }
 
 }

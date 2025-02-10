@@ -8,6 +8,8 @@
 <body>
     <!-- Incluir el componente Navbar -->
     <x-navbar />
+
+    <div class="pt-24 pb-12 bg-[#022133]">
     <section class="page-section" id="services">
         <div class="container">
             <div class="text-center">
@@ -30,5 +32,6 @@
     </section>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    </div>
 </body>
 </html>
