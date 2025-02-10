@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -28,12 +28,12 @@ class ProfileController extends Controller
         $user = auth()->user();
         $user->name = $request->name;
         $user->email = $request->email;
-
+        $imagePath = 'profile_images/' . $user->profile_photo;
         // Procesar la imagen si se ha subido
         if ($request->has('profile_photo')) {
             // Eliminar la imagen anterior si existe
-            if ($user->profile_photo && Storage::exists('profile_images/' . $user->profile_photo)) {
-                Storage::unlink('profile_images/' . $user->profile_photo);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
             }
 
             // Guardar la imagen
@@ -61,10 +61,9 @@ class ProfileController extends Controller
     public function destroy(Request $request)
     {
         $user = auth()->user();
-
+        $imagePath = 'profile_images/' . $user->profile_photo;
         // Verificar si el usuario tiene una foto de perfil
-        if ($user->profile_photo) {
-            $imagePath = public_path($user->profile_photo);
+        if ($user->profile_photo != null) {
 
             // Verificar si la imagen existe en la carpeta y eliminarla
             if (file_exists($imagePath)) {

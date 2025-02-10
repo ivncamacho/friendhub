@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuración de Perfil</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    @livewireStyles
 </head>
 <body class="bg-[#022133] text-white flex items-center justify-center min-h-screen">
 <div class="bg-[#033047] p-8 rounded-lg shadow-lg w-full max-w-md">
@@ -55,7 +56,6 @@
             @enderror
         </div>
 
-
         <!-- Botón de Guardar Cambios -->
         <div class="mt-6 flex justify-between items-center">
             <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300">Guardar Cambios</button>
@@ -66,13 +66,13 @@
             </a>
         </div>
     </form>
-
+<div class=" mt-3 flex justify-center">
     <form action="{{ route('profile.destroy') }}" method="POST">
         @csrf
         @method('DELETE')
-        <button type="submit" class="bg-red-500 text-white p-2 rounded hover:bg-red-600">Eliminar Foto de Perfil</button>
+        <button type="submit" class="bg-red-600 text-white p-2 rounded hover:bg-red-700 transition duration-300">Eliminar Foto de Perfil</button>
     </form>
-
+</div>
 
 </div>
 </body>
