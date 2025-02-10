@@ -17,8 +17,9 @@ class WorkoutController extends Controller
 
     public function show($id)
     {
-        $workout = Workout::with('exercises', 'user')->findOrFail($id);
+        $workout = Workout::with('exercises')->findOrFail($id);
         return view('workouts.show', compact('workout'));
+
     }
 
     public function create()
