@@ -11,45 +11,45 @@
 
 <x-nav-bar />
 
-<!-- Detalles del entrenamiento -->
 <div class="pt-24 pb-12 bg-[#022133]">
-    <div class="container mx-auto px-4">
-        <div class="bg-[#033047] p-8 rounded-lg shadow-lg text-center">
-            <!-- Botón para volver atrás -->
-            <div class="mb-6 text-left">
-                <a href="{{ url()->previous() }}"
-                   class="bg-[#04475F] hover:bg-[#05627F] text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300">
-                    ← Volver Atrás
-                </a>
+    <div class="container mx-auto px-4 max-w-2xl">
+        <div class="bg-[#033047] p-6 rounded-lg shadow-lg">
+            <!-- Propietario del entrenamiento -->
+            <div class="flex items-center space-x-4 mb-6">
+                <img src="{{ asset('profile_images/' . ($exercise->user->profile_photo ?? 'default-profile.jpg')) }}"
+                     alt="{{ $workout->user->name }}"
+                     class="w-12 h-12 rounded-full border-2 border-gray-500">
+                <div>
+                    <h2 class="text-lg font-semibold">{{ $workout->user->name }}</h2>
+                    <p class="text-gray-400 text-sm">Publicado el {{ $workout->created_at->format('d/m/Y') }}</p>
+                </div>
             </div>
 
             <!-- Título -->
-            <h1 class="text-3xl font-bold text-white mb-6">{{ $workout->title }}</h1>
+            <h1 class="text-3xl font-bold text-white mb-4">{{ $workout->title }}</h1>
 
             <!-- Descripción -->
-            <p class="text-gray-400 mb-6 text-lg">{{ $workout->description }}</p>
+            <p class="text-gray-300 mb-6">{{ $workout->description }}</p>
 
             <!-- Lista de ejercicios -->
             <div class="mb-6">
-                <h2 class="text-2xl font-semibold text-white mb-4">Ejercicios del Entrenamiento</h2>
-                <ul class="space-y-4">
+                <h2 class="text-xl font-semibold text-white mb-4">Ejercicios</h2>
+                <div class="space-y-4">
                     @foreach($workout->exercises as $exercise)
-                        <li class="bg-[#04475F] p-4 rounded-lg shadow-lg">
-                            <h3 class="text-xl font-bold text-white">{{ $exercise->title }}</h3>
-                            <p class="text-gray-400">Series: {{ $exercise->pivot->sets }} | Repeticiones: {{ $exercise->pivot->reps }}</p>
-                            <div class="mt-2">
-                                <img src="{{ asset('assets/img/exercises/' . $exercise->media) }}"
-                                     alt="Imagen de {{ $exercise->title }}"
-                                     class="max-w-[500px] max-h-[300px] object-cover rounded mb-4 shadow-lg">
-                            </div>
-                        </li>
+                        <div class="bg-[#04475F] p-4 rounded-lg shadow-md">
+                            <h3 class="text-lg font-bold text-white">{{ $exercise->title }}</h3>
+                            <p class="text-gray-400">Series: <span class="font-bold">{{ $exercise->pivot->sets }}</span> | Reps: <span class="font-bold">{{ $exercise->pivot->reps }}</span></p>
+                            <img src="{{ asset('assets/img/exercises/' . $exercise->media) }}"
+                                 alt="Imagen de {{ $exercise->title }}"
+                                 class="w-full h-40 object-cover rounded mt-2 shadow-lg">
+                        </div>
                     @endforeach
-                </ul>
+                </div>
             </div>
 
-            <!-- Video de YouTube (si está disponible en el entrenamiento) -->
+            <!-- Video de YouTube -->
             @if($workout->youtube_video_id)
-                <div class="mb-6 flex justify-center">
+                <div class="mt-6 flex justify-center">
                     <iframe width="560" height="315"
                             src="https://www.youtube.com/embed/{{ $workout->youtube_video_id }}"
                             frameborder="0"

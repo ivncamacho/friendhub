@@ -10,23 +10,36 @@
 
 <x-nav-bar />
 
-<!-- Espaciado para evitar que el contenido se solape con la barra de navegación -->
-<div class="mt-20 container mx-auto">
+<div class="mt-20 container mx-auto px-4">
     <!-- Botón para añadir entrenamiento centrado -->
-    <div class="text-center mb-8">
-        <a href="{{ route('workouts.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
-            Añadir Nuevo Ejercicio
+    <div class="flex justify-center mb-8">
+        <a href="{{ route('workouts.create') }}"
+           class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 shadow-lg">
+            ➕ Añadir Nuevo Entrenamiento
         </a>
     </div>
 
     <!-- Lista de entrenamientos -->
-    <div class="mt-6">
+    <div class="space-y-6">
         @foreach($workouts as $workout)
-            <div class="bg-white shadow-md rounded-lg p-4 mb-4">
-                <a href="{{ route('workouts.show', $workout->id) }}" class="text-lg font-bold text-blue-600">
+            <div class="bg-[#033047] shadow-lg rounded-lg p-6">
+                <div class="flex items-center mb-4">
+                    <img src="{{ asset('profile_images/' . ($exercise->user->profile_photo ?? 'default-profile.jpg')) }}"
+                         alt="{{ $workout->user->name }}"
+                         class="w-12 h-12 rounded-full border-2 border-blue-400">
+                    <div class="ml-4">
+                        <p class="text-white font-semibold">{{ $workout->user->name }}</p>
+                        <p class="text-gray-400 text-sm">
+                            {{ $workout->created_at ? $workout->created_at->diffForHumans() : 'Fecha no disponible' }}
+                        </p>
+                    </div>
+                </div>
+
+                <a href="{{ route('workouts.show', $workout->id) }}"
+                   class="text-xl font-bold text-white hover:text-blue-400 transition">
                     {{ $workout->title }}
                 </a>
-                <p class="text-gray-600">Creado por: {{ $workout->user->name }}</p>
+                <p class="text-gray-300 mt-2">{{ Str::limit($workout->description, 100) }}</p>
             </div>
         @endforeach
     </div>

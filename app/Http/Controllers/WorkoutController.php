@@ -11,9 +11,14 @@ class WorkoutController extends Controller
 {
     public function index()
     {
-        $workouts = Workout::select('id', 'title', 'user_id')->with('user')->get();
+        $workouts = Workout::select('id', 'title', 'user_id', 'created_at')
+            ->with('user')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         return view('feed.mainPage', compact('workouts'));
     }
+
 
     public function show($id)
     {
