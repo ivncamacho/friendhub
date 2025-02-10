@@ -18,6 +18,20 @@
     <div class="container mx-auto px-4">
         <h1 class="text-3xl font-bold text-center text-white mb-8">Ejercicios Comunes</h1>
 
+        <!-- Mensaje de éxito -->
+        @if (session('success'))
+            <div class="bg-green-500 text-white p-4 mb-8 rounded-lg text-center">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <!-- Botón para añadir nuevo ejercicio -->
+        <div class="text-center mb-8">
+            <a href="{{ route('exercise.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
+                Añadir Nuevo Ejercicio
+            </a>
+        </div>
+
         <!-- Lista de ejercicios comunes -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             @foreach ($exercises as $exercise)
@@ -27,9 +41,10 @@
 
                     <!-- Propietario del ejercicio -->
                     <div class="absolute bottom-4 left-4 flex items-center space-x-2 bg-[#022133] bg-opacity-80 p-2 rounded-full">
-                            <img src="{{ asset('profile_images/' . $exercise->user->profile_photo) }}" alt="{{ $exercise->user->name }}" class="w-8 h-8 rounded-full">
-                            <span class="text-sm text-white">{{ $exercise->user->name }}</span>
+                        <img src="{{ asset('profile_images/' . ($exercise->user->profile_photo ?? 'default-profile.jpg')) }}" alt="{{ $exercise->user->name }}" class="w-8 h-8 rounded-full">
+                        <span class="text-sm text-white">{{ $exercise->user->name }}</span>
                     </div>
+
                 </a>
             @endforeach
         </div>

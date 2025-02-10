@@ -17,11 +17,12 @@
         <p class="text-gray-600">Ingresa tu nueva contraseña y confírmala para continuar.</p>
     </div>
 
-    <form method="POST" action="{{ route('password.store') }}" class="mt-6">
+    <form method="POST" action="{{ route('password.store') }}" class="mt-6" >
         @csrf
 
         <!-- Token -->
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
 
         <!-- Email -->
         <div>

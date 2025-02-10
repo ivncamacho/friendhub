@@ -4,11 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - FriendHub</title>
-    <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="bg-[#022133] flex items-center justify-center min-h-screen">
+
+<!-- Notificación centrada -->
+@if(session('status'))
+    <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 1500)"
+         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div x-show="show" x-transition:enter="transition transform ease-out duration-150"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:leave="transition transform ease-in duration-150"
+             x-transition:leave-end="opacity-0 scale-95"
+             class="bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg flex items-center space-x-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+            </svg>
+            <p>{{ session('status') }}</p>
+        </div>
+    </div>
+@endif
 
 <div class="bg-[#033047] shadow-lg rounded-lg p-8 max-w-md w-full">
     <div class="text-center">
