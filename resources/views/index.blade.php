@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Página de Inicio - FriendHub</title>
+    <title>{{ __('Home') }} - FriendHub</title>
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,22 +23,22 @@
 <div class="relative min-h-screen pt-24 pb-12 z-10">
     <div class="container mx-auto px-4 text-center">
         @auth
-            <h1 class="text-3xl font-bold mb-4">Bienvenido/a de nuevo, {{ Auth::user()->name }}!</h1>
-            <p class="text-lg mb-8">Nos alegra verte nuevamente. Explora las últimas novedades y mantente conectado con tus amigos.</p>
+            <h1 class="text-3xl font-bold mb-4">{{ __('Welcome back,') }} {{ Auth::user()->name }}!</h1>
+            <p class="text-lg mb-8">{{ __('We are happy to see you again. Explore the latest news and stay connected with your friends.') }}</p>
             <!-- Botón para ver el feed de noticias -->
             <a href="{{ route('feed') }}" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition-transform transform hover:scale-105">
-                Ir al Feed de Noticias
+                {{ __('Go to news feed') }}
             </a>
         @else
-            <h1 class="text-3xl font-bold mb-4">Bienvenido/a a FriendHub</h1>
-            <p class="text-lg mb-8">Conéctate con amigos, comparte momentos y descubre nuevas comunidades.</p>
+            <h1 class="text-3xl font-bold mb-4">{{ __('Welcome to FriendHub') }}</h1>
+            <p class="text-lg mb-8">{{ __('Connect with friends, share moments, and discover new communities.') }}</p>
             <!-- Botones de registro e inicio de sesión -->
             <div class="space-x-4">
                 <a href="{{ route('register') }}" class="inline-block bg-green-500 text-white font-semibold py-2 px-4 rounded-lg transition-transform transform hover:scale-105">
-                    Regístrate
+                    {{ __('Register') }}
                 </a>
                 <a href="{{ route('login') }}" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition-transform transform hover:scale-105">
-                    Inicia Sesión
+                    {{ __('Log In') }}
                 </a>
             </div>
         @endauth

@@ -20,16 +20,16 @@
         <!-- Menú Principal -->
         @auth
             <div class="hidden md:flex space-x-4 uppercase font-medium tracking-normal bg-[#023e58] p-3 rounded-lg">
-                <a href="{{ route('index') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Inicio</a>
+                <a href="{{ route('index') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">{{__('Home')}}</a>
                 <a href="{{ route('feed') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Feed</a>
-                <a href="{{ route('famous-workouts') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Ejercicios</a>
-                <a href="{{ route('myworkouts') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Mis Entrenamientos</a>
+                <a href="{{ route('famous-workouts') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">{{__('Exercises')}}</a>
+                <a href="{{ route('myworkouts') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">{{__('My Workouts')}}</a>
             </div>
         @endauth
 
         @guest
             <div class="hidden md:flex space-x-4 uppercase font-medium tracking-normal bg-[#023e58] p-3 rounded-lg">
-                <a href="{{ route('famous-workouts') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">Ejercicios</a>
+                <a href="{{ route('famous-workouts') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">{{__('Exercises')}}</a>
             </div>
         @endguest
 
@@ -46,15 +46,15 @@
 
             <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-40 bg-white text-black rounded-lg shadow-lg overflow-hidden z-50">
                 @auth
-                    <a href="{{ route('dashboard') }}" class="block px-3 py-2 hover:bg-gray-200 text-sm">Perfil</a>
-                    <a href="{{ route('myworkouts') }}" class="block px-3 py-2 hover:bg-gray-200 text-sm">Mis Entrenamientos</a>
+                    <a href="{{ route('dashboard') }}" class="block px-3 py-2 hover:bg-gray-200 text-sm">{{__('Profile')}}</a>
+                    <a href="{{ route('myworkouts') }}" class="block px-3 py-2 hover:bg-gray-200 text-sm">{{__('My Workouts')}}</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="w-full text-left px-3 py-2 hover:bg-gray-200 text-sm">Cerrar Sesión</button>
+                        <button type="submit" class="w-full text-left px-3 py-2 hover:bg-gray-200 text-sm">{{__('Log Out')}}</button>
                     </form>
                 @else
-                    <a href="{{ route('register') }}" class="block px-3 py-2 hover:bg-gray-200 text-sm">Registrarse</a>
-                    <a href="{{ route('login') }}" class="block px-3 py-2 hover:bg-gray-200 text-sm">Iniciar Sesión</a>
+                    <a href="{{ route('register') }}" class="block px-3 py-2 hover:bg-gray-200 text-sm">{{__('Register')}}</a>
+                    <a href="{{ route('login') }}" class="block px-3 py-2 hover:bg-gray-200 text-sm">{{__('Log In')}}</a>
                 @endauth
             </div>
         </div>

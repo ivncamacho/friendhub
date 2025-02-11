@@ -23,13 +23,13 @@
 
             <!-- Campo para el título -->
             <div class="mb-4">
-                <label for="title" class="block text-white font-semibold mb-2">Título</label>
+                <label for="title" class="block text-white font-semibold mb-2">{{__('Title')}}</label>
                 <input type="text" name="title" id="title" value="{{ old('title', $exercise->title) }}" class="w-full px-4 py-2 bg-[#044766] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
 
             <!-- Campo para la descripción -->
             <div class="mb-4">
-                <label for="description" class="block text-white font-semibold mb-2">Descripción</label>
+                <label for="description" class="block text-white font-semibold mb-2">{{__('Description')}}</label>
                 <textarea name="description" id="description" rows="4" class="w-full px-4 py-2 bg-[#044766] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>{{ old('description', $exercise->description) }}</textarea>
             </div>
 
@@ -50,7 +50,7 @@
             <!-- Botón de envío -->
             <div class="text-center">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
-                    Guardar Cambios
+                    {{__('Save Changes')}}
                 </button>
             </div>
         </form>

@@ -55,11 +55,11 @@
 <div class="flex mt-16"> <!-- Agregar mt-16 para desplazar el contenido hacia abajo -->
     <!-- Sidebar -->
     <aside class="bg-blue-800 text-white w-64 min-h-screen p-5">
-        <h2 class="text-lg font-semibold">Menú</h2>
+        <h2 class="text-lg font-semibold">{{ __('Menu') }}</h2>
         <ul class="mt-4 space-y-3">
-            <li><a href="{{ route('index') }}" class="block py-2 px-4 rounded hover:bg-blue-700">Inicio</a></li>
-            <li><a href="{{ route('myworkouts') }}" class="block py-2 px-4 rounded hover:bg-blue-700">Mis Entrenamientos</a></li>
-            <li><a href="{{ route('profile.edit') }}" class="block py-2 px-4 rounded hover:bg-blue-700">Configuración</a></li>
+            <li><a href="{{ route('index') }}" class="block py-2 px-4 rounded hover:bg-blue-700">{{ __('Home') }}</a></li>
+            <li><a href="{{ route('myworkouts') }}" class="block py-2 px-4 rounded hover:bg-blue-700">{{ __('My Workouts') }}</a></li>
+            <li><a href="{{ route('profile.edit') }}" class="block py-2 px-4 rounded hover:bg-blue-700">{{ __('Settings') }}</a></li>
         </ul>
     </aside>
 
@@ -72,7 +72,7 @@
             </div>
         @endif
 
-        <h1 class="text-2xl font-bold text-gray-800">Bienvenido, {{ Auth::user()->name }}</h1>
+        <h1 class="text-2xl font-bold text-gray-800">{{ __('Welcome') }}, {{ Auth::user()->name }}</h1>
 
         </div>
     </main>

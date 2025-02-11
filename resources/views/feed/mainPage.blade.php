@@ -17,13 +17,13 @@
     <div class="flex justify-center mb-8">
         <a href="{{ route('workouts.create') }}"
            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 shadow-lg">
-            ➕ Añadir Nuevo Entrenamiento
+            ➕ {{__('Add new exercise')}}
         </a>
     </div>
 
     <!-- Barra de búsqueda mejorada -->
     <div class="flex justify-center mb-8">
-        <input type="text" id="search-bar" placeholder="Buscar entrenamiento..."
+        <input type="text" id="search-bar" placeholder="{{__('Search workout')}}..."
                class="w-1/3 bg-blue-600 text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 transition duration-300"
                onkeyup="filterWorkouts()" />
     </div>
@@ -36,13 +36,13 @@
                 @if(auth()->user()->role == 'admin' || $workout->user_id == auth()->id())
                     <div class="absolute top-4 right-4 flex space-x-4">
                         <a href="{{ route('workouts.edit', $workout->id) }}" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600">
-                            <i class="fas fa-edit"></i> Editar
+                            <i class="fas fa-edit"></i> {{__('Edit')}}
                         </a>
                         <form action="{{ route('workouts.destroy', $workout->id) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600">
-                                <i class="fas fa-trash-alt"></i> Eliminar
+                                <i class="fas fa-trash-alt"></i> {{__('Delete')}}
                             </button>
                         </form>
                     </div>

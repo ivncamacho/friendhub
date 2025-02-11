@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Entrenamientos - FriendHub</title>
+    <title>{{ __('My Workouts') }} - FriendHub</title>
     <link rel="icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -14,20 +14,20 @@
 
 <div class="container mx-auto px-4 pt-24 pb-12">
     <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold">Mis Entrenamientos</h2>
-        <p class="text-gray-400">Aquí puedes ver tus entrenamientos guardados.</p>
+        <h2 class="text-3xl font-bold">{{ __('My Workouts') }}</h2>
+        <p class="text-gray-400">{{ __('Here you can see your saved workouts.') }}</p>
     </div>
 
     <!-- Botón para añadir nuevo entrenamiento -->
     <div class="text-center mb-8">
         <a href="{{ route('workouts.create') }}"
            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
-            Añadir Nuevo Entrenamiento
+            {{ __('Add new workout') }}
         </a>
     </div>
 
     @if($workouts->isEmpty())
-        <p class="text-center text-gray-400">Aún no has creado entrenamientos.</p>
+        <p class="text-center text-gray-400">{{ __('You havent created any workouts yet.') }}</p>
     @else
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             @foreach($workouts as $workout)
@@ -49,7 +49,7 @@
                     <!-- Botón para ver detalles -->
                     <a href="{{ route('workouts.show', $workout->id) }}"
                        class="inline-block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
-                        Ver Entrenamiento
+                        {{ __('View workout') }}
                     </a>
                 </div>
             @endforeach

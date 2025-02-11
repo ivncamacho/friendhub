@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ejercicios Comunes - FriendHub</title>
+    <title>{{ __('Common Exercises') }} - FriendHub</title>
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,7 +16,7 @@
 <!-- Contenido de ejercicios comunes -->
 <div class="pt-24 pb-12 bg-[#022133]">
     <div class="container mx-auto px-4">
-        <h1 class="text-3xl font-bold text-center text-white mb-8">Ejercicios Comunes</h1>
+        <h1 class="text-3xl font-bold text-center text-white mb-8">{{ __('Common Exercises') }}</h1>
 
         <!-- Mensaje de éxito -->
         @if (session('success'))
@@ -26,12 +26,12 @@
         @endif
 
         <!-- Barra de búsqueda -->
-        <input type="text" id="search" placeholder="Buscar ejercicios..." class="border-2 border-blue-500 bg-blue-100 p-2 rounded-full w-64 mb-8 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black">
+        <input type="text" id="search" placeholder="{{ __('Search exercises') }}..." class="border-2 border-blue-500 bg-blue-100 p-2 rounded-full w-64 mb-8 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black">
 
         <!-- Botón para añadir nuevo ejercicio -->
         <div class="text-center mb-8">
             <a href="{{ route('exercise.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
-                Añadir Nuevo Ejercicio
+                {{ __('Add new exercise') }}
             </a>
         </div>
 
@@ -39,23 +39,23 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="exercise-list">
             @foreach ($exercises as $exercise)
                 <div class="exercise-item relative bg-[#033047] p-6 rounded-lg shadow-lg hover:scale-105 hover:bg-[#044766] transform transition-transform duration-300">
-
+                    @auth
                     <!-- Mostrar botones solo si el usuario es el creador o admin -->
                     @if(auth()->user()->role == 'admin' || $exercise->user_id == auth()->id())
                         <div class="absolute top-4 right-4 flex space-x-4">
                             <a href="{{ route('exercise.edit', $exercise->id) }}" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600">
-                                <i class="fas fa-edit"></i> Editar
+                                <i class="fas fa-edit"></i> {{ __('Edit') }}
                             </a>
                             <form action="{{ route('exercise.destroy', $exercise->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600">
-                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                    <i class="fas fa-trash-alt"></i> {{ __('Delete') }}
                                 </button>
                             </form>
                         </div>
                     @endif
-
+                    @endauth
                     <a href="{{ route('exercise.show', $exercise->id) }}" class="block">
                         <h2 class="text-xl font-semibold text-white mb-4">{{ $exercise->title }}</h2>
                         <img src="{{ asset('assets/img/exercises/' . $exercise->media) }}" alt="Imagen de {{ $exercise->title }}" class="w-full h-48 object-cover rounded mb-4">

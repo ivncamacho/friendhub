@@ -19,7 +19,7 @@
             <div class="mb-6 text-left">
                 <a href="{{ route('famous-workouts') }}"
                    class="bg-[#04475F] hover:bg-[#05627F] text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300">
-                    ← Volver Atrás
+                    ← {{__('Go Back')}}
                 </a>
             </div>
 
