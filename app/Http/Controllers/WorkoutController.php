@@ -61,5 +61,69 @@ class WorkoutController extends Controller
 
         return view('myworkouts', compact('workouts'));
     }
+    public function edit($id)
+    {
+        $workout = Workout::findOrFail($id);
+        $exercises = Exercise::all();
+        // Verifica si el usuario es el creador o es un admin
+        if (auth()->user()->role != 'admin' && $workout->user_id != auth()->id()) {
+            return redirect()->route('feed')->with('error', 'No tienes permisos para editar este entrenamiento.');
+        }
 
+        return view('workouts.edit', compact('workout', 'exercises'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $workout = Workout::findOrFail($id);
+
+        // Verifica si el usuario es el creador o es un admin
+        if (auth()->user()->role != 'admin' && $workout->user_id != auth()->id()) {
+            return redirect()->route('feed')->with('error', 'No tienes permisos para actualizar este entrenamiento.');
+        }
+
+        // Validación de los datos
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'exercises' => 'required|array',
+            'exercises.*.exercise_id' => 'required|exists:exercises,id',
+            'exercises.*.sets' => 'required|integer|min:1',
+            'exercises.*.reps' => 'required|integer|min:1',
+        ]);
+
+        // Actualiza el título y la descripción del entrenamiento
+        $workout->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        // Actualizar los ejercicios en la tabla pivote
+        $exercises = collect($request->exercises)->map(function ($exercise) {
+            return [
+                'exercise_id' => $exercise['exercise_id'],
+                'sets' => $exercise['sets'],
+                'reps' => $exercise['reps'],
+            ];
+        });
+
+        // Sincroniza los ejercicios con la relación pivote
+        $workout->exercises()->sync($exercises);
+
+        return redirect()->route('workouts.show', $workout->id)->with('success', 'Entrenamiento actualizado correctamente.');
+    }
+
+    public function destroy($id)
+    {
+        $workout = Workout::findOrFail($id);
+
+        // Verifica si el usuario es el creador o es un admin
+        if (auth()->user()->role != 'admin' && $workout->user_id != auth()->id()) {
+            return redirect()->route('feed')->with('error', 'No tienes permisos para eliminar este entrenamiento.');
+        }
+
+        $workout->delete();
+
+        return redirect()->route('feed')->with('success', 'Entrenamiento eliminado correctamente.');
+    }
 }

@@ -45,5 +45,19 @@ Route::middleware('auth')->group(function () {
 // Rutas de búsqueda de entrenamientos (sin autenticación)
 Route::get('/search-workouts', [ExerciseController::class, 'search'])->name('search-workouts');
 
+// Rutas de entrenamientos (con protección para editar y eliminar)
+Route::middleware('auth')->group(function () {
+    // Editar, actualizar y eliminar entrenamientos
+    Route::get('/workouts/{id}/edit', [WorkoutController::class, 'edit'])->name('workouts.edit');
+    Route::put('/workouts/{id}', [WorkoutController::class, 'update'])->name('workouts.update');
+    Route::delete('/workouts/{id}', [WorkoutController::class, 'destroy'])->name('workouts.destroy');
+
+    // Editar, actualizar y eliminar ejercicios
+    Route::get('/exercises/{id}/edit', [ExerciseController::class, 'edit'])->name('exercise.edit');
+    Route::put('/exercises/{id}', [ExerciseController::class, 'update'])->name('exercise.update');
+    Route::delete('/exercises/{id}', [ExerciseController::class, 'destroy'])->name('exercise.destroy');
+});
+
+
 // Requerir rutas de autenticación
 require __DIR__.'/auth.php';

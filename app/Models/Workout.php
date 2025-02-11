@@ -10,7 +10,7 @@ class Workout extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'user_id', ];
+    protected $fillable = ['title', 'description', 'user_id'];
 
     public $timestamps = true;
     public function user()

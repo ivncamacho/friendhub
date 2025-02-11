@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feed - FriendHub</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- FontAwesome -->
 </head>
 <body class="bg-[#022133] min-h-screen">
 
@@ -30,25 +31,42 @@
     <!-- Lista de entrenamientos centrada -->
     <div id="workout-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         @foreach($workouts as $workout)
-            <a href="{{ route('workouts.show', $workout->id) }}"
-               class="bg-[#033047] shadow-lg rounded-lg p-6 workout-item transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-[#044766]">
-                <div class="flex items-center mb-4">
-                    <img src="{{ asset('profile_images/' . ($workout->user->profile_photo ?? 'default-profile.jpg')) }}"
-                         alt="{{ $workout->user->name }}"
-                         class="w-12 h-12 rounded-full border-2 border-blue-400">
-                    <div class="ml-4">
-                        <p class="text-white font-semibold">{{ $workout->user->name }}</p>
-                        <p class="text-gray-400 text-sm">
-                            {{ $workout->created_at ? $workout->created_at->diffForHumans() : 'Fecha no disponible' }}
-                        </p>
+            <div class="relative bg-[#033047] shadow-lg rounded-lg p-6 workout-item transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-[#044766]">
+                <!-- Mostrar botones solo si el usuario es el creador o admin -->
+                @if(auth()->user()->role == 'admin' || $workout->user_id == auth()->id())
+                    <div class="absolute top-4 right-4 flex space-x-4">
+                        <a href="{{ route('workouts.edit', $workout->id) }}" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600">
+                            <i class="fas fa-edit"></i> Editar
+                        </a>
+                        <form action="{{ route('workouts.destroy', $workout->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600">
+                                <i class="fas fa-trash-alt"></i> Eliminar
+                            </button>
+                        </form>
                     </div>
-                </div>
+                @endif
 
-                <p class="text-xl font-bold text-white hover:text-blue-400 transition">
-                    {{ $workout->title }}
-                </p>
-                <p class="text-gray-300 mt-2 text-sm">{{ Str::limit($workout->description, 100) }}</p>
-            </a>
+                <a href="{{ route('workouts.show', $workout->id) }}" class="block">
+                    <div class="flex items-center mb-4">
+                        <img src="{{ asset('profile_images/' . ($workout->user->profile_photo ?? 'default-profile.jpg')) }}"
+                             alt="{{ $workout->user->name }}"
+                             class="w-12 h-12 rounded-full border-2 border-blue-400">
+                        <div class="ml-4">
+                            <p class="text-white font-semibold">{{ $workout->user->name }}</p>
+                            <p class="text-gray-400 text-sm">
+                                {{ $workout->created_at ? $workout->created_at->diffForHumans() : 'Fecha no disponible' }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="text-xl font-bold text-white hover:text-blue-400 transition">
+                        {{ $workout->title }}
+                    </p>
+                    <p class="text-gray-300 mt-2 text-sm">{{ Str::limit($workout->description, 100) }}</p>
+                </a>
+            </div>
         @endforeach
     </div>
 </div>
@@ -59,7 +77,8 @@
         let workouts = document.querySelectorAll('.workout-item');
 
         workouts.forEach(workout => {
-            let title = workout.querySelector('p').textContent.toLowerCase();
+            // Buscar solo por el título
+            let title = workout.querySelector('p.text-xl').textContent.toLowerCase();
             let description = workout.querySelector('p.text-gray-300').textContent.toLowerCase();
 
             if (title.includes(searchQuery) || description.includes(searchQuery)) {

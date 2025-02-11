@@ -17,7 +17,7 @@
         <div class="bg-[#033047] p-8 rounded-lg shadow-lg text-center">
             <!-- Botón para volver atrás -->
             <div class="mb-6 text-left">
-                <a href="{{ url()->previous() }}"
+                <a href="{{ route('famous-workouts') }}"
                    class="bg-[#04475F] hover:bg-[#05627F] text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300">
                     ← Volver Atrás
                 </a>
@@ -27,6 +27,7 @@
             <h1 class="text-3xl font-bold text-white mb-6">{{ $exercise->title }}</h1>
 
             <!-- Imagen más pequeña -->
+
             <div class="flex justify-center">
                 <img src="{{ asset('assets/img/exercises/' . $exercise->media) }}"
                      alt="Imagen de {{ $exercise->title }}"

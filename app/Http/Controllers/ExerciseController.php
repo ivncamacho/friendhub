@@ -71,4 +71,64 @@ class ExerciseController extends Controller
         // Devolver los resultados como JSON
         return response()->json($exercises);
     }
+    public function edit($id)
+    {
+        $exercise = Exercise::findOrFail($id);
+
+        // Verifica si el usuario es el creador o es un admin
+        if (auth()->user()->role != 'admin' && $exercise->user_id != auth()->id()) {
+            return redirect()->route('famous-workouts')->with('error', 'No tienes permisos para editar este ejercicio.');
+        }
+
+        return view('exercise.edit', compact('exercise'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $exercise = Exercise::findOrFail($id);
+
+        // Validar los datos del formulario
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Opcional, pero debe ser una imagen válida
+            'youtube_video_id' => 'nullable|string|max:255',
+        ]);
+
+        // Actualizar los campos básicos
+        $exercise->title = $request->title;
+        $exercise->description = $request->description;
+        $exercise->youtube_video_id = $request->youtube_video_id;
+
+        // Manejo de la imagen
+        if ($request->hasFile('media')) {
+            // Obtener solo el nombre del archivo
+            $fileName = time() . '.' . $request->file('media')->getClientOriginalExtension();
+
+            // Mover la imagen a la carpeta pública "exercises_images"
+            $request->file('media')->move(public_path('assets/img/exercises'), $fileName);
+
+            // Guardar solo el nombre en la base de datos
+            $exercise->media = $fileName;
+        }
+
+        $exercise->save();
+
+        return redirect()->route('exercise.show', $exercise->id)->with('success', 'Ejercicio actualizado correctamente');
+    }
+
+
+    public function destroy($id)
+    {
+        $exercise = Exercise::findOrFail($id);
+
+        // Verifica si el usuario es el creador o es un admin
+        if (auth()->user()->role != 'admin' && $exercise->user_id != auth()->id()) {
+            return redirect()->route('famous-workouts')->with('error', 'No tienes permisos para eliminar este ejercicio.');
+        }
+
+        $exercise->delete();
+
+        return redirect()->route('famous-workouts')->with('success', 'Ejercicio eliminado correctamente.');
+    }
 }
