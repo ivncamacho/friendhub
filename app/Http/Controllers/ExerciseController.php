@@ -58,5 +58,17 @@ class ExerciseController extends Controller
     {
         return view('exercise.create');
     }
+    public function search(Request $request)
+    {
+        // Obtener la consulta de búsqueda
+        $query = $request->get('q');
 
+        // Buscar ejercicios que coincidan con la consulta
+        $exercises = Exercise::where('title', 'like', '%' . $query . '%')
+            ->orWhere('description', 'like', '%' . $query . '%')
+            ->get();
+
+        // Devolver los resultados como JSON
+        return response()->json($exercises);
+    }
 }

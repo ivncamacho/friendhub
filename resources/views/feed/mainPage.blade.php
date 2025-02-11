@@ -24,7 +24,7 @@
         @foreach($workouts as $workout)
             <div class="bg-[#033047] shadow-lg rounded-lg p-6">
                 <div class="flex items-center mb-4">
-                    <img src="{{ asset('profile_images/' . ($exercise->user->profile_photo ?? 'default-profile.jpg')) }}"
+                    <img src="{{ asset('profile_images/' . ($workout->user->profile_photo ?? 'default-profile.jpg')) }}"
                          alt="{{ $workout->user->name }}"
                          class="w-12 h-12 rounded-full border-2 border-blue-400">
                     <div class="ml-4">

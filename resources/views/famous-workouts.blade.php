@@ -25,6 +25,9 @@
             </div>
         @endif
 
+        <!-- Barra de búsqueda -->
+        <input type="text" id="search" placeholder="Buscar ejercicios..." class="border-2 border-blue-500 bg-blue-100 p-2 rounded-full w-64 mb-8 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black">
+
         <!-- Botón para añadir nuevo ejercicio -->
         <div class="text-center mb-8">
             <a href="{{ route('exercise.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
@@ -33,9 +36,9 @@
         </div>
 
         <!-- Lista de ejercicios comunes -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="exercise-list">
             @foreach ($exercises as $exercise)
-                <a href="{{ route('exercise.show', $exercise->id) }}" class="relative bg-[#033047] p-6 rounded-lg shadow-lg block transform transition-transform duration-300 hover:scale-105 hover:bg-[#044766]">
+                <a href="{{ route('exercise.show', $exercise->id) }}" class="exercise-item relative bg-[#033047] p-6 rounded-lg shadow-lg block transform transition-transform duration-300 hover:scale-105 hover:bg-[#044766]">
                     <h2 class="text-xl font-semibold text-white mb-4">{{ $exercise->title }}</h2>
                     <img src="{{ asset('assets/img/exercises/' . $exercise->media) }}" alt="Imagen de {{ $exercise->title }}" class="w-full h-48 object-cover rounded mb-4">
 
@@ -44,7 +47,6 @@
                         <img src="{{ asset('profile_images/' . ($exercise->user->profile_photo ?? 'default-profile.jpg')) }}" alt="{{ $exercise->user->name }}" class="w-8 h-8 rounded-full">
                         <span class="text-sm text-white">{{ $exercise->user->name }}</span>
                     </div>
-
                 </a>
             @endforeach
         </div>
@@ -55,6 +57,27 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('search').addEventListener('input', function() {
+        let query = this.value.toLowerCase();
+
+        // Obtener todos los ejercicios
+        let exercises = document.querySelectorAll('.exercise-item');
+
+        exercises.forEach(function(exercise) {
+            let title = exercise.querySelector('h2').innerText.toLowerCase();
+            let description = exercise.querySelector('img').alt.toLowerCase(); // Si tienes descripciones
+
+            // Si la búsqueda coincide con el título o la descripción, mostrar el ejercicio
+            if (title.includes(query) || description.includes(query)) {
+                exercise.style.display = 'block';
+            } else {
+                exercise.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

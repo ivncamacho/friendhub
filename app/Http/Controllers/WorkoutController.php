@@ -52,4 +52,14 @@ class WorkoutController extends Controller
 
         return redirect()->route('feed')->with('status', 'Entrenamiento creado con éxito.');
     }
+    public function myWorkouts()
+    {
+        $userId = Auth::id();
+        $workouts = Workout::where('user_id', $userId)
+            ->orderBy('created_at', 'desc') // Ordenar del más nuevo al más antiguo
+            ->get();
+
+        return view('myworkouts', compact('workouts'));
+    }
+
 }

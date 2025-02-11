@@ -1,37 +1,61 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>My Workouts</title>
-    <!-- Favicon -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Entrenamientos - FriendHub</title>
     <link rel="icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <!-- Incluir el componente Navbar -->
-    <x-navbar />
+<body class="bg-[#022133] min-h-screen text-white">
 
-    <div class="pt-24 pb-12 bg-[#022133]">
-    <section class="page-section" id="services">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-heading text-uppercase">Mis Entrenamientos</h2>
-                <h3 class="section-subheading text-muted">Aquí puedes ver tus entrenamientos guardados.</h3>
-            </div>
-            <div class="row text-center">
-                <div class="col-md-6">
-                    <h4 class="my-3">Entrenamiento 1</h4>
-                    <p class="text-muted
-                    ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
-                <div class="col-md-6">
-                    <h4 class="my-3">Entrenamiento 2</h4>
-                    <p class="text-muted
-                    ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+<!-- Navbar -->
+<x-navbar />
+
+<div class="container mx-auto px-4 pt-24 pb-12">
+    <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold">Mis Entrenamientos</h2>
+        <p class="text-gray-400">Aquí puedes ver tus entrenamientos guardados.</p>
     </div>
+
+    <!-- Botón para añadir nuevo entrenamiento -->
+    <div class="text-center mb-8">
+        <a href="{{ route('workouts.create') }}"
+           class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
+            Añadir Nuevo Entrenamiento
+        </a>
+    </div>
+
+    @if($workouts->isEmpty())
+        <p class="text-center text-gray-400">Aún no has creado entrenamientos.</p>
+    @else
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            @foreach($workouts as $workout)
+                <div class="bg-[#033047] p-6 rounded-lg shadow-lg">
+                    <!-- Usuario -->
+                    <div class="flex items-center space-x-4 mb-4">
+                        <img src="{{ asset('profile_images/' . (Auth::user()->profile_photo ?? 'default-profile.jpg')) }}"
+                             alt="Perfil de {{ Auth::user()->name }}"
+                             class="w-12 h-12 rounded-full border-2 border-gray-500">
+                        <div>
+                            <h3 class="text-lg font-semibold">{{ Auth::user()->name }}</h3>
+                            <p class="text-gray-400 text-sm">{{ $workout->created_at->format('d/m/Y') }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Título -->
+                    <h3 class="text-xl font-bold">{{ $workout->title }}</h3>
+
+                    <!-- Botón para ver detalles -->
+                    <a href="{{ route('workouts.show', $workout->id) }}"
+                       class="inline-block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
+                        Ver Entrenamiento
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    @endif
+</div>
+
 </body>
 </html>

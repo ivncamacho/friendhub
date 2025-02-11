@@ -3,6 +3,8 @@
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WorkoutController;
+use App\Models\Exercise;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /**Route::get('/', function () {
@@ -37,10 +39,8 @@ Route::get('/exercises/create', [ExerciseController::class, 'create'])->name('ex
 // Ruta para procesar el formulario y guardar el ejercicio
 Route::post('/exercises', [ExerciseController::class, 'store'])->name('exercise.store');
 
+Route::get('/myworkouts', [WorkoutController::class, 'myWorkouts'])->name('myworkouts');
 
-Route::get('/myworkouts', function () {
-    return view('myworkouts');
-})->middleware(['auth', 'verified'])->name('myworkouts');
 
 Route::middleware('auth')->group(function () {
 // Ruta para ver el formulario de edición del perfil
@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/destroy', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/search-workouts', [ExerciseController::class, 'search']);
 
 /**Route::middleware('auth')->group(function () {
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -16,7 +16,7 @@
         <div class="bg-[#033047] p-6 rounded-lg shadow-lg">
             <!-- Propietario del entrenamiento -->
             <div class="flex items-center space-x-4 mb-6">
-                <img src="{{ asset('profile_images/' . ($exercise->user->profile_photo ?? 'default-profile.jpg')) }}"
+                <img src="{{ asset('profile_images/' . ($workout->user->profile_photo ?? 'default-profile.jpg')) }}"
                      alt="{{ $workout->user->name }}"
                      class="w-12 h-12 rounded-full border-2 border-gray-500">
                 <div>
