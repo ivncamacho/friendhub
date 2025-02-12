@@ -62,7 +62,7 @@
 
                         <!-- Propietario del ejercicio -->
                         <div class="absolute bottom-4 left-4 flex items-center space-x-2 bg-[#022133] bg-opacity-80 p-2 rounded-full">
-                            <img src="{{ asset('profile_images/' . ($exercise->user->profile_photo ?? 'default-profile.jpg')) }}" alt="{{ $exercise->user->name }}" class="w-8 h-8 rounded-full">
+                            <img src="{{ asset($exercise->user->profile_photo ?   $exercise->user->profile_photo : 'profile_images/default-profile.jpg') }}" alt="{{ $exercise->user->name }}" class="w-8 h-8 rounded-full">
                             <span class="text-sm text-white">{{ $exercise->user->name }}</span>
                         </div>
                     </a>

@@ -34,7 +34,7 @@
                 <div class="bg-[#033047] p-6 rounded-lg shadow-lg">
                     <!-- Usuario -->
                     <div class="flex items-center space-x-4 mb-4">
-                        <img src="{{ asset('profile_images/' . (Auth::user()->profile_photo ?? 'default-profile.jpg')) }}"
+                        <img src="{{ Auth::user()->profile_photo ? asset(Auth::user()->profile_photo) : asset('profile_images/default-profile.jpg') }}"
                              alt="Perfil de {{ Auth::user()->name }}"
                              class="w-12 h-12 rounded-full border-2 border-gray-500">
                         <div>

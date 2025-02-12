@@ -17,7 +17,7 @@
     <div class="flex justify-center mb-8">
         <a href="{{ route('workouts.create') }}"
            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 shadow-lg">
-            ➕ {{__('Add new exercise')}}
+            ➕ {{__('Add new workout')}}
         </a>
     </div>
 
@@ -50,7 +50,7 @@
 
                 <a href="{{ route('workouts.show', $workout->id) }}" class="block">
                     <div class="flex items-center mb-4">
-                        <img src="{{ asset('profile_images/' . ($workout->user->profile_photo ?? 'default-profile.jpg')) }}"
+                        <img src="{{ asset($workout->user->profile_photo ?   $workout->user->profile_photo : 'profile_images/default-profile.jpg') }}"
                              alt="{{ $workout->user->name }}"
                              class="w-12 h-12 rounded-full border-2 border-blue-400">
                         <div class="ml-4">
