@@ -48,13 +48,7 @@
         </div>
 
         <!-- Foto de Perfil -->
-        <div class="mb-4">
-            <label for="profile_photo" class="block text-sm font-medium mb-2">{{__('Profile Picture')}}</label>
-            <input type="file" name="profile_photo" id="profile_photo" class="w-full p-3 rounded-lg bg-[#022133] border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            @error('profile_photo')
-            <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
-        </div>
+        @livewire('drag-drop')
 
         <!-- Botón de Guardar Cambios -->
         <div class="mt-6 flex justify-between items-center">
@@ -66,13 +60,14 @@
             </a>
         </div>
     </form>
-<div class=" mt-3 flex justify-center">
-    <form action="{{ route('profile.destroy') }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="bg-red-600 text-white p-2 rounded hover:bg-red-700 transition duration-300">{{__('Delete Profile Picture')}}</button>
-    </form>
-</div>
+
+    <div class="mt-3 flex justify-center">
+        <form action="{{ route('profile.destroy') }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="bg-red-600 text-white p-2 rounded hover:bg-red-700 transition duration-300">{{__('Delete Profile Picture')}}</button>
+        </form>
+    </div>
 
 </div>
 </body>

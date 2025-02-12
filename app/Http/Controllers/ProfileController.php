@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+
     // Mostrar formulario de edición del perfil
     public function edit()
     {
@@ -34,16 +35,16 @@ class ProfileController extends Controller
         $user->email = $validated['email'];
 
         // Manejo de la foto de perfil
-        if ($request->has('profile_photo')) {
-            // Eliminar la foto anterior si existe
-            if ($user->profile_photo) {
-                Storage::delete('profile_images/' . $user->profile_photo);
-            }
-
-            // Subir la nueva foto
-            $imagePath = $request->file('profile_photo')->store('profile_images', 'public');
-            $user->profile_photo = basename($imagePath);
-        }
+//        if ($request->has('profile_photo')) {
+//            // Eliminar la foto anterior si existe
+//            if ($user->profile_photo) {
+//                Storage::delete('profile_images/' . $user->profile_photo);
+//            }
+//
+//            // Subir la nueva foto
+//            $imagePath = $request->file('profile_photo')->store('profile_images', 'public');
+//            $user->profile_photo = basename($imagePath);
+//        }
 
         // Actualizar la contraseña si se proporciona
         if ($request->filled('password')) {
@@ -65,7 +66,7 @@ class ProfileController extends Controller
         // Verificar si tiene foto de perfil
         if ($user->profile_photo) {
             // Eliminar la imagen del almacenamiento
-            Storage::delete('profile_images/' . $user->profile_photo);
+            Storage::delete( $user->profile_photo);
 
             // Restablecer la foto en la base de datos
             $user->profile_photo = null;

@@ -37,10 +37,10 @@
         <div x-data="{ open: false }" class="relative bg-[#023e58] p-3 rounded-lg">
             <button @click="open = !open" class="uppercase hover:text-gray-400 focus:outline-none font-medium transition-colors">
                 @auth
-                    <img src="{{ Auth::user()->profile_photo ? asset('profile_images/' . Auth::user()->profile_photo) : asset('profile_images/default-profile.jpg') }}" alt="Foto de perfil" class="w-8 h-8 rounded-full inline-block mr-2">
+                    <img src="{{ Auth::user()->profile_photo ? asset(Auth::user()->profile_photo) : asset('profile_images/default-profile.jpg') }}" alt="Foto de perfil" class="w-8 h-8 rounded-full inline-block mr-2">
                     {{ Auth::user()->name }}
                 @else
-                    Entra
+                    {{__('Enter')}}
                 @endauth
             </button>
 
