@@ -51,6 +51,24 @@
                        class="inline-block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
                         {{ __('View workout') }}
                     </a>
+
+                    <!-- Botones de editar y eliminar -->
+                    @if(auth()->user()->role == 'admin' || $workout->user_id == auth()->id())
+                        <div class="mt-4 flex space-x-4">
+                            <a href="{{ route('workouts.edit', $workout->id) }}"
+                               class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition duration-300">
+                                {{ __('Edit') }}
+                            </a>
+                            <form action="{{ route('workouts.destroy', $workout->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                        class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-300">
+                                    {{ __('Delete') }}
+                                </button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
             @endforeach
         </div>
