@@ -14,7 +14,7 @@ public function run()
         'email' => 'friendhub@gmail.com',
         'password' => bcrypt('12345678'),
         'role' => 'admin',
-        'profile_photo' => 'friendhub.png',
+        'profile_photo' => './profile_images/friendhub.png',
     ]);
     User::factory(10)->create();
 }
