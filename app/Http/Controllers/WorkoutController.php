@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Workout;
 use App\Models\Exercise;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class WorkoutController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
         $workouts = Workout::select('id', 'title', 'user_id', 'created_at')
@@ -64,11 +66,8 @@ class WorkoutController extends Controller
     public function edit($id)
     {
         $workout = Workout::findOrFail($id);
+        $this->authorize('authorWorkout', $workout);
         $exercises = Exercise::all();
-        // Verifica si el usuario es el creador o es un admin
-        if (auth()->user()->role != 'admin' && $workout->user_id != auth()->id()) {
-            return redirect()->route('feed')->with('error', 'No tienes permisos para editar este entrenamiento.');
-        }
 
         return view('workouts.edit', compact('workout', 'exercises'));
     }
@@ -76,11 +75,8 @@ class WorkoutController extends Controller
     public function update(Request $request, $id)
     {
         $workout = Workout::findOrFail($id);
+        $this->authorize('authorWorkout', $workout);
 
-        // Verifica si el usuario es el creador o es un admin
-        if (auth()->user()->role != 'admin' && $workout->user_id != auth()->id()) {
-            return redirect()->route('feed')->with('error', 'No tienes permisos para actualizar este entrenamiento.');
-        }
 
         // Validación de los datos
         $request->validate([
@@ -116,11 +112,7 @@ class WorkoutController extends Controller
     public function destroy($id)
     {
         $workout = Workout::findOrFail($id);
-
-        // Verifica si el usuario es el creador o es un admin
-        if (auth()->user()->role != 'admin' && $workout->user_id != auth()->id()) {
-            return redirect()->route('feed')->with('error', 'No tienes permisos para eliminar este entrenamiento.');
-        }
+        $this->authorize('authorWorkout', $workout);
 
         $workout->delete();
 

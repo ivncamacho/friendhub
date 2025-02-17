@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Exercise;
+use App\Policies\ExercisePolicy;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

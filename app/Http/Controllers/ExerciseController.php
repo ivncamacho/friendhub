@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Exercise;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ExerciseController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
         // Obtén los ejercicios paginados de 12 en 12
@@ -17,10 +19,8 @@ class ExerciseController extends Controller
     }
     public function show($id)
     {
-        // Obtén el ejercicio por su ID
         $exercise = Exercise::findOrFail($id);
 
-        // Pasa los datos a la vista
         return view('exercise.show', compact('exercise'));
     }
     public function store(Request $request)
@@ -47,7 +47,7 @@ class ExerciseController extends Controller
             'description' => $request->description,
             'media' => $mediaPath ? basename($mediaPath) : null,
             'youtube_video_id' => $request->youtube_video_id,
-            'user_id' => auth()->id(), // Asignar el ID del usuario autenticado
+            'user_id' => auth()->id(),
         ]);
 
         // Redirigir a la lista de ejercicios con un mensaje de éxito
@@ -60,25 +60,20 @@ class ExerciseController extends Controller
     }
     public function search(Request $request)
     {
-        // Obtener la consulta de búsqueda
+
         $query = $request->get('q');
 
-        // Buscar ejercicios que coincidan con la consulta
         $exercises = Exercise::where('title', 'like', '%' . $query . '%')
             ->orWhere('description', 'like', '%' . $query . '%')
             ->get();
 
-        // Devolver los resultados como JSON
+
         return response()->json($exercises);
     }
     public function edit($id)
     {
         $exercise = Exercise::findOrFail($id);
-
-        // Verifica si el usuario es el creador o es un admin
-        if (auth()->user()->role != 'admin' && $exercise->user_id != auth()->id()) {
-            return redirect()->route('famous-workouts')->with('error', 'No tienes permisos para editar este ejercicio.');
-        }
+        $this->authorize('authorExercise', $exercise);
 
         return view('exercise.edit', compact('exercise'));
     }
@@ -86,16 +81,17 @@ class ExerciseController extends Controller
     public function update(Request $request, $id)
     {
         $exercise = Exercise::findOrFail($id);
+        $this->authorize('authorExercise', $exercise);
 
-        // Validar los datos del formulario
+
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Opcional, pero debe ser una imagen válida
+            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'youtube_video_id' => 'nullable|string|max:255',
         ]);
 
-        // Actualizar los campos básicos
+
         $exercise->title = $request->title;
         $exercise->description = $request->description;
         $exercise->youtube_video_id = $request->youtube_video_id;
@@ -121,14 +117,10 @@ class ExerciseController extends Controller
     public function destroy($id)
     {
         $exercise = Exercise::findOrFail($id);
-
-        // Verifica si el usuario es el creador o es un admin
-        if (auth()->user()->role != 'admin' && $exercise->user_id != auth()->id()) {
-            return redirect()->route('famous-workouts')->with('error', 'No tienes permisos para eliminar este ejercicio.');
-        }
+        $this->authorize('authorExercise', $exercise);
 
         $exercise->delete();
 
-        return redirect()->route('famous-workouts')->with('success', 'Ejercicio eliminado correctamente.');
-    }
+        return redirect()->route('famous-workouts')->with('success', 'Ejercicio eliminado correctamente.');    }
+
 }
