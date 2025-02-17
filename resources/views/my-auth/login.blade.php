@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{__('Log In')}} - FriendHub</title>
-    <link rel="icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-</head>
-<body class="bg-[#022133] flex items-center justify-center min-h-screen">
+<x-auth-layout meta-title="{{__('Log In')}}">
 
 <!-- Notificación centrada -->
 @if(session('status'))
@@ -57,7 +47,8 @@
                 <input type="checkbox" name="remember" class="mr-2">
                 {{__('Remember Me')}}
             </label>
-            <a href="{{ route('password.request') }}" class="text-[#1E90FF] text-sm">{{__('Forgot your password?')}}</a>
+
+            <a href="{{ route('password.request') }}" class="text-[#1E90FF] ml-2 text-sm">{{__('Forgot your password?')}}</a>
         </div>
 
         <!-- Botón de inicio de sesión -->
@@ -71,5 +62,4 @@
     </p>
 </div>
 
-</body>
-</html>
+</x-auth-layout>

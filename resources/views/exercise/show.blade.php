@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $exercise->title }} - FriendHub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-</head>
-<body class="bg-[#022133] text-white">
+<x-pages-layout meta-title="{{ $exercise->title }}">
 
 <x-nav-bar />
 
@@ -51,6 +42,4 @@
     </div>
 </div>
 
-
-</body>
-</html>
+</x-pages-layout>

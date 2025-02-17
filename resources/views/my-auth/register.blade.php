@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{__('Register')}} - FriendHub</title>
-    <!-- Favicon -->
-    <link rel="icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-[#022133] flex items-center justify-center min-h-screen">
 
-<div class="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
+<x-auth-layout meta-title="{{__('Register')}}">
+
+
+<div class="bg-white shadow-lg rounded-xl p-10 w-full max-w-md">
     <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">{{__('Create Account')}}</h2>
 
     <!-- Formulario de Registro -->
@@ -61,5 +53,4 @@
     </p>
 </div>
 
-</body>
-</html>
+</x-auth-layout>

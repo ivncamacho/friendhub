@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{__('Recover Password')}} - FriendHub</title>
-    <!-- Favicon -->
-    <link rel="icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<x-auth-layout meta-title="{{__('Recover Password')}}">
+
 
 <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
     <div class="text-center">
@@ -47,5 +38,4 @@
     </p>
 </div>
 
-</body>
-</html>
+</x-auth-layout>

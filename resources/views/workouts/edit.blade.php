@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{__('Edit Workout')}} - FriendHub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-[#022133] min-h-screen flex items-center justify-center">
+<x-auth-layout meta-title="{{__('Edit Workout')}}">
 
 <x-nav-bar />
 
-<div class="bg-[#022133] shadow-lg rounded-lg p-8 max-w-lg w-full">
+<div class="bg-[#022133] shadow-lg rounded-lg p-8 max-w-lg w-full ">
     <h2 class="text-2xl font-bold text-white text-center">{{__('Edit Workout')}}</h2>
     <form action="{{ route('workouts.update', $workout->id) }}" method="POST" class="mt-6">
-        @csrf
-        @method('PUT') <!-- Se utiliza PUT para actualizar el entrenamiento -->
 
-        <!-- Título -->
+        @csrf
+        @method('PUT')
+
         <div>
             <label class="block text-gray-300">{{__('Title')}}</label>
             <input type="text" name="title" value="{{ $workout->title }}" required class="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
@@ -83,6 +75,4 @@
         exerciseIndex++;
     }
 </script>
-
-</body>
-</html>
+</x-auth-layout>

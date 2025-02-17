@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ __('My Workouts') }} - FriendHub</title>
-    <link rel="icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-[#022133] min-h-screen text-white">
-
-<!-- Navbar -->
+<x-pages-layout meta-title="{{ __('My Workouts') }}">
 <x-navbar />
 
 <div class="container mx-auto px-4 pt-24 pb-12">
@@ -75,5 +64,4 @@
     @endif
 </div>
 
-</body>
-</html>
+</x-pages-layout>

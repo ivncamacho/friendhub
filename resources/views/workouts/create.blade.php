@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{__('Create New Workout')}} - FriendHub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-[#022133] min-h-screen flex items-center justify-center">
+<x-auth-layout meta-title="{{__('Create New Workout')}}">
 
 <x-nav-bar />
 
@@ -14,19 +6,20 @@
     <h2 class="text-2xl font-bold text-white text-center">{{__('Create New Workout')}}</h2>
     <form action="{{ route('workouts.store') }}" method="POST" class="mt-6">
         @csrf
-        <!-- Título -->
+
+
         <div>
             <label class="block text-gray-300">{{__('Title')}}</label>
             <input type="text" name="title" required class="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
         </div>
 
-        <!-- Descripción -->
+
         <div class="mt-4">
             <label class="block text-gray-300">{{__('Description')}}</label>
             <textarea name="description" class="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
         </div>
 
-        <!-- Ejercicios -->
+
         <div class="mt-4">
             <label class="block text-gray-300">{{__('Exercises')}}</label>
             <div id="exercise-container">
@@ -46,7 +39,6 @@
         </div>
 
 
-        <!-- Botón de guardar -->
         <button type="submit" class="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
             {{__('Save ')}}
         </button>
@@ -79,5 +71,4 @@
 
 </script>
 
-</body>
-</html>
+</x-auth-layout>

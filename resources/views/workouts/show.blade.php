@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $workout->title }} - FriendHub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-</head>
-<body class="bg-[#022133] text-white">
+<x-pages-layout meta-title="{{ $workout->title }}">
 
 <x-nav-bar />
 
 <div class="pt-24 pb-12 bg-[#022133]">
     <div class="container mx-auto px-4 max-w-2xl">
         <div class="bg-[#033047] p-6 rounded-lg shadow-lg">
-            <!-- Propietario del entrenamiento -->
+
             <div class="flex items-center space-x-4 mb-6">
                 <img src="{{ asset($workout->user->profile_photo ?   $workout->user->profile_photo : 'profile_images/default-profile.jpg') }}"
                      alt="{{ $workout->user->name }}"
@@ -25,13 +16,13 @@
                 </div>
             </div>
 
-            <!-- Título -->
+
             <h1 class="text-3xl font-bold text-white mb-4">{{ $workout->title }}</h1>
 
-            <!-- Descripción -->
+
             <p class="text-gray-300 mb-6">{{ $workout->description }}</p>
 
-            <!-- Lista de ejercicios -->
+
             <div class="mb-6">
                 <h2 class="text-xl font-semibold text-white mb-4">{{__('Exercises')}}</h2>
                 <div class="space-y-4">
@@ -46,22 +37,8 @@
                     @endforeach
                 </div>
             </div>
-
-            <!-- Video de YouTube -->
-            @if($workout->youtube_video_id)
-                <div class="mt-6 flex justify-center">
-                    <iframe width="560" height="315"
-                            src="https://www.youtube.com/embed/{{ $workout->youtube_video_id }}"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen
-                            class="rounded-lg shadow-lg">
-                    </iframe>
-                </div>
-            @endif
         </div>
     </div>
 </div>
 
-</body>
-</html>
+</x-pages-layout>

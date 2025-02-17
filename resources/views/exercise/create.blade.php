@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Añadir Nuevo Ejercicio - FriendHub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-</head>
-<body class="bg-[#022133] text-white">
+<x-auth-layout meta-title="{{__('Add new exercise')}}">
 
 <x-nav-bar />
 
 <!-- Contenido del formulario -->
-<div class="pt-24 pb-12 bg-[#022133]">
+<div class="pt-24 pb-12 bg-[#022133]" >
     <div class="container mx-auto px-4">
         <h1 class="text-3xl font-bold text-center text-white mb-8">Añadir Nuevo Ejercicio</h1>
 
@@ -54,5 +45,4 @@
     </div>
 </div>
 
-</body>
-</html>
+</x-auth-layout>
