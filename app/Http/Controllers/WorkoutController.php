@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\WorkoutPublished;
 use Illuminate\Http\Request;
 use App\Models\Workout;
 use App\Models\Exercise;
@@ -47,11 +48,13 @@ class WorkoutController extends Controller
 
         $workout = Workout::create([
             'title' => $request->title,
+            'description' => $request->description,
+            'exercises' => $request->exercises,
             'user_id' => Auth::id(),
         ]);
 
         $workout->exercises()->attach($request->exercises);
-
+        event(new WorkoutPublished($workout));
         return redirect()->route('feed')->with('status', 'Entrenamiento creado con éxito.');
     }
     public function myWorkouts()

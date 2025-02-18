@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\ExercisePublished;
+use App\Events\WorkoutPublished;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -43,6 +45,7 @@ class WorkoutController extends Controller
 
         $workout->exercises()->attach($request->exercises);
 
+        event(new WorkoutPublished($workout));
         return response()->json(['message' => 'Entrenamiento creado con éxito', 'workout' => $workout], 201);
     }
 

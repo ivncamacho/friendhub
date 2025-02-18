@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\ExercisePublished;
 use App\Http\Controllers\Controller;
 use App\Models\Exercise;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -37,7 +38,7 @@ class ExerciseController extends Controller
             'youtube_video_id' => $request->youtube_video_id,
             'user_id' => auth()->id(),
         ]);
-
+        event(new ExercisePublished($exercise));
         return response()->json(['message' => 'Ejercicio creado correctamente', 'exercise' => $exercise], 201);
     }
 
