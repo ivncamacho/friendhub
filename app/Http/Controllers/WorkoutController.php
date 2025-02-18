@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\WorkoutPublished;
+use App\Jobs\GenerateWorkoutPDF;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Models\Workout;
@@ -27,6 +28,7 @@ class WorkoutController extends Controller
     public function show($id)
     {
         $workout = Workout::with('exercises')->findOrFail($id);
+        GenerateWorkoutPdf::dispatch($workout);
         return view('workouts.show', compact('workout'));
 
     }
@@ -125,8 +127,16 @@ class WorkoutController extends Controller
 
     public function GeneratePDF($id)
     {
-        $workout = Workout::with('exercises')->findOrFail($id);
-        $doc = pdf::loadView('workouts.pdf', compact('workout'));
-        return $doc->download('workouts_report.pdf');
+        $workout = Workout::findOrFail($id);
+        $exercises = $workout->exercises;
+
+        $data = [
+            'workout' => $workout,
+            'exercises' => $exercises
+        ];
+
+        $doc = pdf::loadView('workouts.pdf', $data);
+
+        return $doc->download('workout_' . $id .'.pdf');
     }
 }

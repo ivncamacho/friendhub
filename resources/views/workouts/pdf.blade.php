@@ -76,8 +76,6 @@
     </div>
 
     <div class="profile">
-        <img src="{{ asset($workout->user->profile_photo ? $workout->user->profile_photo : 'profile_images/default-profile.jpg') }}"
-             alt="{{ $workout->user->name }}">
         <div>
             <p><strong>{{ $workout->user->name }}</strong></p>
             <p>{{__('Published on')}} {{ $workout->created_at->format('d/m/Y') }}</p>
@@ -93,7 +91,7 @@
             <div class="exercise">
                 <h3>{{ $exercise->title }}</h3>
                 <p>{{__('Sets')}}: <strong>{{ $exercise->pivot->sets }}</strong> | {{__('Reps')}}: <strong>{{ $exercise->pivot->reps }}</strong></p>
-                <img src="{{ asset('assets/img/exercises/' . $exercise->media) }}"
+                <img src="{{  $exercise->media }}"
                      alt="Imagen de {{ $exercise->title }}">
             </div>
         @endforeach

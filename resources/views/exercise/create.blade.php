@@ -13,7 +13,7 @@
 
             <!-- Campo para el título -->
             <div class="mb-4">
-                <label for="title" class="block text-white font-semibold mb-2">Título</label>
+                <label for="title" class="block text-white font-semibold mb-2">Titulo</label>
                 <input type="text" name="title" id="title" class="w-full px-4 py-2 bg-[#044766] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
 

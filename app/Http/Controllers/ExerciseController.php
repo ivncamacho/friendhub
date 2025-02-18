@@ -6,6 +6,7 @@ use App\Events\ExercisePublished;
 use App\Models\Exercise;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Str;
 
 class ExerciseController extends Controller
 {
@@ -26,7 +27,6 @@ class ExerciseController extends Controller
     }
     public function store(Request $request)
     {
-
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -34,25 +34,33 @@ class ExerciseController extends Controller
             'youtube_video_id' => 'nullable|string|max:255',
         ]);
 
+        $fileName = null;
 
         if ($request->hasFile('media')) {
-            $mediaPath = $request->file('media')->store('assets/img/exercises', 'public');
-        } else {
-            $mediaPath = null;
+            // Obtener el archivo de la imagen
+            $file = $request->file('media');
+
+            // Definir la ruta donde se almacenará la imagen en public/assets/img/exercises/
+            $fileName =  Str::random(20) . '.' . $file->getClientOriginalExtension();
+
+            // Mover la imagen a la carpeta pública
+            $file->move(public_path('assets/img/exercises'), $fileName);
         }
 
-
+        // Crear el ejercicio
         $exercise = Exercise::create([
             'title' => $request->title,
             'description' => $request->description,
-            'media' => $mediaPath ? basename($mediaPath) : null,
+            'media' => $fileName,
             'youtube_video_id' => $request->youtube_video_id,
             'user_id' => auth()->id(),
         ]);
 
         event(new ExercisePublished($exercise));
+
         return redirect()->route('famous-workouts')->with('success', 'Ejercicio creado correctamente.');
     }
+
 
     public function create()
     {
