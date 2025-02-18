@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\WorkoutPublished;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Models\Workout;
 use App\Models\Exercise;
@@ -120,5 +121,12 @@ class WorkoutController extends Controller
         $workout->delete();
 
         return redirect()->route('feed')->with('success', 'Entrenamiento eliminado correctamente.');
+    }
+
+    public function GeneratePDF($id)
+    {
+        $workout = Workout::with('exercises')->findOrFail($id);
+        $doc = pdf::loadView('workouts.pdf', compact('workout'));
+        return $doc->download('workouts_report.pdf');
     }
 }

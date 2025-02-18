@@ -51,11 +51,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/workouts/{id}/edit', [WorkoutController::class, 'edit'])->name('workouts.edit');
     Route::put('/workouts/{id}', [WorkoutController::class, 'update'])->name('workouts.update');
     Route::delete('/workouts/{id}', [WorkoutController::class, 'destroy'])->name('workouts.destroy');
+    Route::get('/workouts/pdf/{id}' , [WorkoutController::class, 'GeneratePDF'])->name('workout.pdf');
+
 
     // Editar, actualizar y eliminar ejercicios
     Route::get('/exercises/{id}/edit', [ExerciseController::class, 'edit'])->name('exercise.edit');
     Route::put('/exercises/{id}', [ExerciseController::class, 'update'])->name('exercise.update');
     Route::delete('/exercises/{id}', [ExerciseController::class, 'destroy'])->name('exercise.destroy');
+
 });
 
 
