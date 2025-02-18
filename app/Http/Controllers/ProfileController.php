@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -34,19 +35,7 @@ class ProfileController extends Controller
         $user->name = $validated['name'];
         $user->email = $validated['email'];
 
-        // Manejo de la foto de perfil
-//        if ($request->has('profile_photo')) {
-//            // Eliminar la foto anterior si existe
-//            if ($user->profile_photo) {
-//                Storage::delete('profile_images/' . $user->profile_photo);
-//            }
-//
-//            // Subir la nueva foto
-//            $imagePath = $request->file('profile_photo')->store('profile_images', 'public');
-//            $user->profile_photo = basename($imagePath);
-//        }
 
-        // Actualizar la contraseña si se proporciona
         if ($request->filled('password')) {
             $user->password = Hash::make($validated['password']);
         }
@@ -57,18 +46,24 @@ class ProfileController extends Controller
         // Redirigir con mensaje de éxito
         return redirect()->route('dashboard')->with('success', 'Cambios efectuados correctamente');
     }
-
-    // Metodo para eliminar la foto de perfil
     public function destroy()
     {
+
         $user = auth()->user();
 
-        // Verificar si tiene foto de perfil
+        $user->delete();
+
+        Auth::logout();
+        return redirect()->route('index');
+    }
+    public function destroyImage()
+    {
+        $user = auth()->user();
         if ($user->profile_photo) {
-            // Eliminar la imagen del almacenamiento
+
             Storage::delete( $user->profile_photo);
 
-            // Restablecer la foto en la base de datos
+
             $user->profile_photo = null;
             $user->save();
 

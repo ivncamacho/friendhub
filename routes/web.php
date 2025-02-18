@@ -10,7 +10,7 @@ Route::view('/', 'index')->name('index'); // Página principal
 Route::get('/famous-workouts', [ExerciseController::class, 'index'])->name('famous-workouts'); // Ejercicios comunes
 Route::get('/exercise/{id}', [ExerciseController::class, 'show'])->name('exercise.show'); // Ver detalle ejercicio
 Route::get('/login', function () {
-    return view('auth.login'); // Vista login
+    return view('auth.login');
 })->name('login');
 Route::get('/register', function () {
     return view('auth.register'); // Vista registro
@@ -32,8 +32,8 @@ Route::middleware('auth')->group(function () {
     // Rutas de perfil
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile/destroy', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+    Route::delete('/profile/delete', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/profile/destroyImage', [ProfileController::class, 'destroyImage'])->name('profile.destroyImage');
     // Mis entrenamientos
     Route::get('/myworkouts', [WorkoutController::class, 'myWorkouts'])->name('myworkouts');
 

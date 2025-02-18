@@ -1,29 +1,39 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 
-test('login screen can be rendered', function () {
+uses(RefreshDatabase::class);
+
+it('login screen can be rendered', function () {
     $response = $this->get('/login');
 
     $response->assertStatus(200);
 });
 
-test('users can authenticate using the login screen', function () {
-    $user = User::factory()->create();
+it('users can authenticate using the login screen', function () {
 
-    $response = $this->post('/login', [
+    $user = User::factory()->create([
+        'password' => '12345678',
+        'email_verified_at' => now(),
+    ]);
+$this->actingAs($user);
+
+    $response = $this->post( route('login'), [
         'email' => $user->email,
-        'password' => 'password',
+        'password' => '12345678',
     ]);
 
-    $this->assertAuthenticated();
-    $response->assertRedirect(route('dashboard', absolute: false));
+    $this->assertAuthenticatedAs($user);
+    $response->assertRedirect(route('dashboard'));
 });
 
-test('users can not authenticate with invalid password', function () {
+
+it('users can not authenticate with invalid password', function () {
     $user = User::factory()->create();
 
-    $this->post('/login', [
+    $this->post(route('login'), [
         'email' => $user->email,
         'password' => 'wrong-password',
     ]);
@@ -31,10 +41,10 @@ test('users can not authenticate with invalid password', function () {
     $this->assertGuest();
 });
 
-test('users can logout', function () {
+it('users can logout', function () {
     $user = User::factory()->create();
 
-    $response = $this->actingAs($user)->post('/logout');
+    $response = $this->actingAs($user)->post(route('logout'));
 
     $this->assertGuest();
     $response->assertRedirect('/');

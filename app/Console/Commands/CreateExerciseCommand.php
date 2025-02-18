@@ -31,11 +31,15 @@ class CreateExerciseCommand extends Command
         $email = $this->argument('email');
         $password = $this->argument('password');
 
+        $title = $this->argument('title');
+        if (empty($title)) {
+            $this->error('title is required');
+            return;
+        }
 
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             $this->info("Loggued as {$email}");
 
-            $title = $this->argument('title');
             $description = $this->argument('description') ;
             $media = $this->argument('media');
             $youtube_video_id = $this->argument('youtube_video_id');
@@ -46,6 +50,7 @@ class CreateExerciseCommand extends Command
                 'description' => $description,
                 'media' => $media,
                  'youtube_video_id'=> $youtube_video_id,
+                'user_id' => Auth::id(),
             ]);
 
             $this->info("Exercise '{$exercise->title}' created succesfully.");
