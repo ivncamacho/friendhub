@@ -7,6 +7,9 @@ use App\Models\Exercise;
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Workout>
+ */
 class WorkoutSeeder extends Seeder
 {
     public function run(): void

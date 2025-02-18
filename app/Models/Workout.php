@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Workout extends Model
 {
+    /** @use HasFactory<\Database\Factories\WorkoutFactory> */
     use HasFactory;
 
     protected $fillable = ['title', 'description', 'user_id'];
