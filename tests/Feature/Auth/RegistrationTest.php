@@ -17,3 +17,9 @@ it('new users can register', function () {
     $this->assertAuthenticated();
     $response->assertRedirect(route('dashboard', absolute: false));
 });
+
+it('returns the register view when creating a new user', function () {
+    $response = $this->get(route('register'));
+    $response->assertStatus(200);
+    $response->assertViewIs('my-auth.register');
+});

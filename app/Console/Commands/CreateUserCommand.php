@@ -26,12 +26,6 @@ class CreateUserCommand extends Command
     public function handle()
     {
 
-        if (!$this->argument('name') || !$this->argument('email')) {
-            $this->error('The name and email fields are required.');
-            return 1;
-        }
-
-
         if (User::where('email', $this->argument('email'))->exists()) {
             $this->error('The email is already taken.');
             return 1;
