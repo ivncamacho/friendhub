@@ -57,7 +57,7 @@
     </form>
 
     <div class="mt-3 flex justify-center">
-        <form action="{{ route('profile.destroy') }}" method="POST">
+        <form action="{{ route('profile.destroyImage') }}" method="POST">
             @csrf
             @method('DELETE')
             <button type="submit" class="bg-red-600 text-white p-2 rounded hover:bg-red-700 transition duration-300">{{__('Delete Profile Picture')}}</button>

@@ -1,23 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FriendHub</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-</head>
 <body class="bg-[#022133] text-white text-sm">
 
 <nav class="fixed top-0 left-0 w-full bg-[#01121c] shadow-md h-16 z-50">
     <div class="container mx-auto px-4 flex justify-between items-center h-full">
-        <!-- Logo -->
+
         <a href="{{ route('index') }}">
             <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" class="h-10 rounded-full">
         </a>
 
-        <!-- Menú Principal -->
+
         @auth
             <div class="hidden md:flex space-x-4 uppercase font-medium tracking-normal bg-[#023e58] p-3 rounded-lg">
                 <a href="{{ route('index') }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">{{__('Home')}}</a>
@@ -33,7 +24,12 @@
             </div>
         @endguest
 
-        <!-- Dropdown Autenticación -->
+        <div class="flex space-x-4 uppercase font-medium tracking-normal bg-[#023e58] p-3 rounded-lg">
+            <a href="{{ route('lang.switch', ['locale' => 'es']) }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">ES</a>
+            <a href="{{ route('lang.switch', ['locale' => 'en']) }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">EN</a>
+        </div>
+
+
         <div x-data="{ open: false }" class="relative bg-[#023e58] p-3 rounded-lg">
             <button @click="open = !open" class="uppercase hover:text-gray-400 focus:outline-none font-medium transition-colors">
                 @auth
@@ -62,4 +58,4 @@
 </nav>
 
 </body>
-</html>
+
