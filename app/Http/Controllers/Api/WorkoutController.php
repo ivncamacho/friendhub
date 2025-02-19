@@ -31,22 +31,29 @@ class WorkoutController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'exercises' => 'required|array',
-        ]);
+    {$data = $request->validate([
+        'title' => 'required|string',
+        'description' => 'nullable|string',
+        'exercises' => 'required|array',
+        'exercises.*.exercise_id' => 'required|exists:exercises,id',
+        'exercises.*.sets' => 'required|integer',
+        'exercises.*.reps' => 'required|integer',
+    ]);
 
         $workout = Workout::create([
-            'title' => $request->title,
-            'user_id' => Auth::id(),
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'user_id' => auth()->id(),
         ]);
 
-        $workout->exercises()->attach($request->exercises);
-
+        foreach ($data['exercises'] as $exercise) {
+            $workout->exercises()->attach($exercise['exercise_id'], [
+                'sets' => $exercise['sets'],
+                'reps' => $exercise['reps'],
+            ]);
+        }
         event(new WorkoutPublished($workout));
-        return response()->json(['message' => 'Entrenamiento creado con éxito', 'workout' => $workout], 201);
+        return response()->json(['message' => 'Entrenamiento creado con éxito'], 201);
     }
 
 

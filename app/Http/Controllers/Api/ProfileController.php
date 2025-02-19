@@ -42,6 +42,10 @@ class ProfileController extends Controller
     {
         $user = User::findOrFail($id);
 
+        if ($request->user()->id !== $user->id) {
+            return response()->json(['message' => 'You do not have permission to perform this action.'], 403);
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:users,name,' . $user->id,
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
@@ -56,6 +60,11 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+
+        if (auth()->user()->id !== $user->id) {
+            return response()->json(['message' => 'You do not have permission to perform this action.'], 403);
+        }
+
         $user->delete();
         return response()->json(['message' => 'Usuario eliminado correctamente'], 200);
     }
@@ -84,4 +93,5 @@ class ProfileController extends Controller
 
         return response()->json(['message' => 'Sesión cerrada correctamente'], 200);
     }
+
 }
