@@ -11,16 +11,13 @@ use Illuminate\Support\Facades\Storage;
 class ProfileController extends Controller
 {
 
-    // Mostrar formulario de edición del perfil
     public function edit()
     {
         return view('profile.edit');
     }
 
-    // Actualizar datos del perfil
     public function update(Request $request)
     {
-        // Validación
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:users,name,' . auth()->id(),
             'email' => 'required|string|email|max:255|unique:users,email,' . auth()->id(),
@@ -51,9 +48,10 @@ class ProfileController extends Controller
 
         $user = auth()->user();
 
-        $user->delete();
-
         Auth::logout();
+
+        $user->forceDelete();
+
         return redirect()->route('index');
     }
     public function destroyImage()
@@ -61,7 +59,7 @@ class ProfileController extends Controller
         $user = auth()->user();
         if ($user->profile_photo) {
 
-            Storage::delete( $user->profile_photo);
+            Storage::delete($user->profile_photo);
 
 
             $user->profile_photo = null;

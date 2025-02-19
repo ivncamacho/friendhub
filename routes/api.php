@@ -36,6 +36,5 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('{id}', [WorkoutController::class, 'destroy']);
     });
 
-    // Ruta de logout
     Route::middleware('auth:sanctum')->post('/logout', [ProfileController::class, 'logout']);
 });
