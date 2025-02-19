@@ -20,7 +20,7 @@ Route::post('/register', [ProfileController::class, 'store']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('exercises')->group(function () {
-        Route::get('/', [ExerciseController::class, 'index']); 
+        Route::get('/', [ExerciseController::class, 'index']);
         Route::get('{id}', [ExerciseController::class, 'show']);
         Route::post('/', [ExerciseController::class, 'store']);
         Route::put('{id}', [ExerciseController::class, 'update']);

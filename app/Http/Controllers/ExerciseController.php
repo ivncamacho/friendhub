@@ -64,9 +64,9 @@ class ExerciseController extends Controller
 
     public function create()
     {
-
         return view('exercise.create');
     }
+
     public function search(Request $request)
     {
 
@@ -105,15 +105,13 @@ class ExerciseController extends Controller
         $exercise->description = $request->description;
         $exercise->youtube_video_id = $request->youtube_video_id;
 
-        // Manejo de la imagen
+
         if ($request->hasFile('media')) {
-            // Obtener solo el nombre del archivo
+
             $fileName = time() . '.' . $request->file('media')->getClientOriginalExtension();
 
-            // Mover la imagen a la carpeta pública "exercises_images"
             $request->file('media')->move(public_path('assets/img/exercises'), $fileName);
 
-            // Guardar solo el nombre en la base de datos
             $exercise->media = $fileName;
         }
 
