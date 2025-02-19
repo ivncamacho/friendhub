@@ -4,7 +4,7 @@
 
 <div class="mt-20 container mx-auto px-4">
 
-    <!-- Botón para añadir entrenamiento centrado -->
+
     <div class="flex justify-center mb-8">
         <a href="{{ route('workouts.create') }}"
            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 shadow-lg">
@@ -24,7 +24,7 @@
         @foreach($workouts as $workout)
             <div class="relative bg-[#033047] shadow-lg rounded-lg p-6 workout-item transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-[#044766]">
                 <!-- Mostrar botones solo si el usuario es el creador o admin -->
-                @if(auth()->user()->role == 'admin' || $workout->user_id == auth()->id())
+                @if(auth()->user()->hasRole('admin') || $workout->user_id == auth()->id())
                     <div class="absolute top-4 right-4 flex space-x-4">
                         <a href="{{ route('workouts.edit', $workout->id) }}" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600">
                             <i class="fas fa-edit"></i> {{__('Edit')}}

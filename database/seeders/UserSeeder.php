@@ -7,15 +7,17 @@ use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
-public function run()
-{
-    User::factory()->create([
-        'name' => 'friendhub',
-        'email' => 'friendhub@gmail.com',
-        'password' => bcrypt('12345678'),
-        'role' => 'admin',
-        'profile_photo' => './profile_images/friendhub.png',
-    ]);
-    User::factory(10)->create();
-}
+    public function run()
+    {
+        $adminUser = User::factory()->create([
+            'name' => 'friendhub',
+            'email' => 'friendhub@gmail.com',
+            'password' => bcrypt('12345678'),
+            'profile_photo' => './profile_images/friendhub.png',
+        ]);
+        $adminUser->assignRole('admin');
+
+        $normalUser = User::factory(10)->create();
+        $normalUser->assignRole('user');
+    }
 }
