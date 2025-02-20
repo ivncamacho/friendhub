@@ -9,12 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'index')->name('index');
 Route::get('/famous-workouts', [ExerciseController::class, 'index'])->name('famous-workouts'); // Ejercicios comunes
 Route::get('/exercise/{id}', [ExerciseController::class, 'show'])->name('exercise.show'); // Ver detalle ejercicio
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
+
 
 
 Route::middleware('auth')->group(function () {
@@ -61,12 +56,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/lang/{locale}', function ($locale) {
-    if (in_array($locale, ['en', 'es'])) {
-        session(['locale' => $locale]);
-    }
-    return redirect()->back();
-})->name('lang.switch');
 
 
 require __DIR__.'/auth.php';

@@ -53,12 +53,6 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        if (!$user->email_verified_at) {
-            throw ValidationException::withMessages([
-                'email' => 'You must verify your email before logging in.',
-            ]);
-        }
-
         Auth::login($user, $this->boolean('remember'));
 
         RateLimiter::clear($this->throttleKey());

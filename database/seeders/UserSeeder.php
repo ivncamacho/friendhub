@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         ]);
         $adminUser->assignRole('admin');
 
-        $normalUser = User::factory(10)->create();
-        $normalUser->assignRole('user');
+        User::factory(10)->create();
+
     }
 }

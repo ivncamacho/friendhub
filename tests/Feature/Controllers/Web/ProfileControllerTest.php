@@ -84,8 +84,10 @@ it('deletes the user profile image', function () {
     $response = $this->delete(route('profile.destroyImage'));
 
     $response->assertRedirect(route('dashboard'));
+    $response->assertSessionHas('success', 'Foto de perfil eliminada con éxito.');
 
-    $this->assertDatabaseMissing('users', ['profile_photo' => $user->profile_photo]);
+    $user->refresh();
+    expect($user->profile_photo)->toBeNull();
 
     Storage::disk('public')->assertMissing($user->profile_photo);
 });

@@ -61,7 +61,6 @@ class ProfileController extends Controller
 
             Storage::delete($user->profile_photo);
 
-
             $user->profile_photo = null;
             $user->save();
 

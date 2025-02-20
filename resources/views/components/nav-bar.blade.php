@@ -24,12 +24,6 @@
             </div>
         @endguest
 
-        <div class="flex space-x-4 uppercase font-medium tracking-normal bg-[#023e58] p-3 rounded-lg">
-            <a href="{{ route('lang.switch', ['locale' => 'es']) }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">ES</a>
-            <a href="{{ route('lang.switch', ['locale' => 'en']) }}" class="hover:text-gray-400 transition-colors transform hover:scale-105">EN</a>
-        </div>
-
-
         <div x-data="{ open: false }" class="relative bg-[#023e58] p-3 rounded-lg">
             <button @click="open = !open" class="uppercase hover:text-gray-400 focus:outline-none font-medium transition-colors">
                 @auth

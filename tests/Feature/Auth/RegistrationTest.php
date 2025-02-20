@@ -1,12 +1,20 @@
 <?php
 
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+
+beforeEach(function () {
+    Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
+});
+
 it('registration screen can be rendered', function () {
-    $response = $this->get('/register');
+    $response = $this->get(route('register'));
 
     $response->assertStatus(200);
 });
 
 it('new users can register', function () {
+
     $response = $this->post(route('register'), [
         'name' => 'Test User',
         'email' => 'test@example.com',
@@ -14,6 +22,8 @@ it('new users can register', function () {
         'password_confirmation' => 'password',
     ]);
 
+    $user = User::where('email', 'test@example.com')->first();
+    $this->actingAs($user);
     $this->assertAuthenticated();
     $response->assertRedirect(route('dashboard', absolute: false));
 });
