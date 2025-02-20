@@ -4,66 +4,59 @@ use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
 
 it('should create an exercise when authenticated with correct credentials', function () {
-    // Arrange: Crea un usuario para autenticar
     $user = User::factory()->create([
         'email' => 'test@example.com',
         'password' => bcrypt('password123'),
     ]);
 
-    // Act: Ejecuta el comando como el usuario autenticado
-    $command = Artisan::call('exercise:create test@example.com password123 "New Exercise" "Exercise Description" "media_url" "youtube_id"');
+    $this->artisan('exercise:create')
+        ->expectsQuestion('Escribe el correo electronico', $user->email)
+        ->expectsQuestion('Escribe la contraseña', 'password123') // Provide the plain password
+        ->expectsOutput("Loggued as {$user->name}")
+        ->expectsQuestion('Escribe el titulo del ejercicio', 'New Exercise')
+        ->expectsQuestion('Escribe la descripcion del ejercicio', 'Exercise Description')
+        ->expectsQuestion('Escribe la ruta de la imagen que quieres que se vea reflejada (opcional)', 'media_url')
+        ->expectsQuestion('Escribe el id del tutorial de youtube (opcional)', 'youtube_id')
+        ->assertExitCode(0);
 
-    // Assert: Verifica que el ejercicio fue creado
-    $this->assertStringContainsString('Exercise \'New Exercise\' created succesfully.', Artisan::output());
+    $this->assertDatabaseHas('exercises', [
+        'title' => 'New Exercise',
+        'description' => 'Exercise Description',
+        'media' => 'media_url',
+        'youtube_video_id' => 'youtube_id',
+        'user_id' => $user->id,
+    ]);
+
 });
 
 it('should fail to create an exercise with incorrect credentials', function () {
-    // Arrange: Crea un usuario para autenticar
     $user = User::factory()->create([
         'email' => 'test@example.com',
         'password' => bcrypt('password123'),
     ]);
 
-    // Act: Intenta ejecutar el comando con credenciales incorrectas
-    $command = Artisan::call('exercise:create test@example.com wrongpassword "New Exercise" "Exercise Description" "media_url" "youtube_id"');
-
-    // Assert: Verifica que el mensaje de error sea el esperado
-    $this->assertStringContainsString('Incorrect credentials.', Artisan::output());
+    $this->artisan('exercise:create')
+        ->expectsQuestion('Escribe el correo electronico', $user->email)
+        ->expectsQuestion('Escribe la contraseña', '123456789')
+        ->expectsOutput('Incorrect credentials.')
+        ->assertExitCode(1);
 });
 
 it('should fail to create an exercise without title argument', function () {
-    // Arrange: Crea un usuario para autenticar
     $user = User::factory()->create([
         'email' => 'test@example.com',
         'password' => bcrypt('password123'),
     ]);
 
-    // Act: Ejecuta el comando sin el argumento 'title'
-    $command = Artisan::call('exercise:create test@example.com password123 "" "Exercise Description" "media_url" "youtube_id"');
-
-    // Assert: Verifica que el comando falle por falta de título
-    $this->assertStringContainsString('title is required', Artisan::output());
+    $this->artisan('exercise:create')
+        ->expectsQuestion('Escribe el correo electronico', $user->email)
+        ->expectsQuestion('Escribe la contraseña', 'password123')
+        ->expectsOutput("Loggued as {$user->name}")
+        ->expectsQuestion('Escribe el titulo del ejercicio', '')
+        ->expectsQuestion('Escribe la descripcion del ejercicio', 'Description')
+        ->expectsQuestion('Escribe la ruta de la imagen que quieres que se vea reflejada (opcional)', 'media_url')
+        ->expectsQuestion('Escribe el id del tutorial de youtube (opcional)', 'youtube_id')
+        ->expectsOutput('Title and description is required.')
+        ->assertExitCode(1);
 });
 
-
-it('should create exercise with optional arguments', function () {
-    // Arrange: Crea un usuario para autenticar
-    $user = User::factory()->create([
-        'email' => 'test@example.com',
-        'password' => bcrypt('password123'),
-    ]);
-
-    // Act: Ejecuta el comando con los argumentos opcionales (description, media, youtube_video_id)
-    $command = Artisan::call('exercise:create test@example.com password123 "New Exercise" "Exercise Description" "media_url" "youtube_id"');
-
-    // Assert: Verifica que el ejercicio fue creado con los valores pasados
-    $this->assertStringContainsString('Exercise \'New Exercise\' created succesfully.', Artisan::output());
-});
-
-it('should not create an exercise if the user is not authenticated', function () {
-    // Act: Ejecuta el comando sin autenticarse
-    $command = Artisan::call('exercise:create test@example.com wrongpassword "New Exercise" "Exercise Description" "media_url" "youtube_id"');
-
-    // Assert: Verifica que el mensaje de error sea el esperado
-    $this->assertStringContainsString('Incorrect credentials.', Artisan::output());
-});

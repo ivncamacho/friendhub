@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Exercise;
+use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +14,7 @@ class CreateExerciseCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'exercise:create {email} {password} {title} {description?} {media?} {youtube_video_id?}';
+    protected $signature = 'exercise:create';
 
     /**
      * The console command description.
@@ -27,35 +28,37 @@ class CreateExerciseCommand extends Command
      */
     public function handle()
     {
+        $email = $this->ask('Escribe el correo electronico');
+        $password = $this->secret('Escribe la contraseña');
 
-        $email = $this->argument('email');
-        $password = $this->argument('password');
+        $user = User::where('email', $email)->first();
+        if (!Auth::attempt(['email' => $email, 'password' => $password])) {
 
-        $title = $this->argument('title');
-        if (empty($title)) {
-            $this->error('title is required');
-            return;
-        }
+            $this->error('Incorrect credentials.');
+            return 1;
+        } else {
+            $this->info("Loggued as " . $user->name);
 
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            $this->info("Loggued as {$email}");
+            $title = $this->ask('Escribe el titulo del ejercicio');
+            $description = $this->ask('Escribe la descripcion del ejercicio');
+            $media = $this->ask('Escribe la ruta de la imagen que quieres que se vea reflejada (opcional)');
+            $youtube_video_id = $this->ask('Escribe el id del tutorial de youtube (opcional)');
 
-            $description = $this->argument('description') ;
-            $media = $this->argument('media');
-            $youtube_video_id = $this->argument('youtube_video_id');
-
+            if (empty($title) || empty($description)) {
+                $this->error('Title and description is required.');
+                return 1;
+            }
 
             $exercise = Exercise::create([
                 'title' => $title,
                 'description' => $description,
                 'media' => $media,
-                 'youtube_video_id'=> $youtube_video_id,
+                'youtube_video_id'=> $youtube_video_id,
                 'user_id' => Auth::id(),
             ]);
 
             $this->info("Exercise '{$exercise->title}' created succesfully.");
-        } else {
-            $this->error('Incorrect credentials.');
+            return 0;
         }
     }
 }
