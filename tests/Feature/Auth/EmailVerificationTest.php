@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(RefreshDatabase::class);
 
 it('email verification screen can be rendered', function () {
     $user = User::factory()->unverified()->create();

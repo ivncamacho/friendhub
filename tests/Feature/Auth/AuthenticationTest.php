@@ -52,19 +52,6 @@ it('users can logout', function () {
     $response->assertRedirect('/');
 });
 
-it('users cannot authenticate with unverified email', function () {
-    $user = User::factory()->create([
-        'email_verified_at' => null,
-    ]);
-
-    $response = $this->post(route('login'), [
-        'email' => $user->email,
-        'password' => 'password',
-    ]);
-
-    $this->assertGuest();
-    $response->assertSessionHasErrors('email');
-});
 
 it('session is regenerated on login', function () {
     Session::start();

@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Hash;
 
 it('should create a user with the required arguments', function () {
     // Arrange
@@ -9,35 +11,40 @@ it('should create a user with the required arguments', function () {
     $password = 'password123';
 
     // Act
-    $command = Artisan::call('user:create ' . $name . ' ' . $email . ' ' . $password);
+    $this->artisan('user:create')
+        ->expectsQuestion('Escribe el nombre de usuario', $name)
+        ->expectsQuestion('Escribe el correo electronico', $email)
+        ->expectsQuestion('Escribe la contraseña', $password)
+        ->assertExitCode(0);
 
     // Assert
-    $this->assertStringContainsString('User created succesfully', Artisan::output());
-
     $user = User::where('email', $email)->first();
     $this->assertNotNull($user);
     $this->assertEquals($name, $user->name);
     $this->assertTrue(Hash::check($password, $user->password));
 });
 
-it('should create a user with a generated password if no password is provided', function () {
+it('should fail to create a user with a duplicate name', function () {
     // Arrange
-    $name = 'Generated';
-    $email = 'generateduser@example.com';
+    $existingUser = User::factory()->create([
+        'name' => 'duplicate',
+    ]);
+    $name = 'duplicate';
+    $email = 'newuser@example.com';
+    $password = '12345678';
 
     // Act
-    $command = Artisan::call('user:create ' . $name . ' ' . $email);
+    $this->artisan('user:create')
+        ->expectsQuestion('Escribe el nombre de usuario', $name)
+        ->expectsQuestion('Escribe el correo electronico', $email)
+        ->expectsQuestion('Escribe la contraseña', $password)
+        ->assertExitCode(1);
 
     // Assert
-    $this->assertStringContainsString('User created succesfully', Artisan::output());
-
-    $user = User::where('email', $email)->first();
-    $this->assertNotNull($user);
-    $this->assertEquals($name, $user->name);
-
-
-    $this->assertNotEquals($user->password, 'password123');
+    $user = User::where('name', $name)->first();
+    $this->assertEquals($existingUser->id, $user->id);
 });
+
 
 it('should fail to create a user with a duplicate email', function () {
     // Arrange
@@ -46,16 +53,16 @@ it('should fail to create a user with a duplicate email', function () {
     ]);
     $name = 'NewUser';
     $email = 'duplicate@example.com';
+    $password = '12345678';
 
     // Act
-    $command = Artisan::call('user:create ' . $name . ' ' . $email);
+    $this->artisan('user:create')
+        ->expectsQuestion('Escribe el nombre de usuario', $name)
+        ->expectsQuestion('Escribe el correo electronico', $email)
+        ->expectsQuestion('Escribe la contraseña', $password)
+        ->assertExitCode(1);
 
     // Assert
-    $this->assertStringContainsString('The email is already taken.', Artisan::output());
-
-
     $user = User::where('email', $email)->first();
     $this->assertEquals($existingUser->id, $user->id);
 });
-
-

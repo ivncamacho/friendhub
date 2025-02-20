@@ -14,7 +14,7 @@ class CreateUserCommand extends Command
          *
          * @var string
          */
-        protected $signature = 'user:create {name} {email} {password?}';
+        protected $signature = 'user:create';
 
         /**
          * The console command description.
@@ -25,21 +25,25 @@ class CreateUserCommand extends Command
 
     public function handle()
     {
+        $name = $this->ask('Escribe el nombre de usuario');
+        $email = $this->ask('Escribe el correo electronico');
+        $password = $this->secret('Escribe la contraseña');
 
-        if (User::where('email', $this->argument('email'))->exists()) {
-            $this->error('The email is already taken.');
+        if (User::where('name', $name)->exists()){
+            $this->error('The name is already taken.');
             return 1;
         }
-
-        if ($this->argument('name') && $this->argument('email')) {
+        if (User::where('email', $email)->exists()) {
+            $this->error('The email is registered.');
+            return 1;
+        }
             User::create(
                 [
-                    'name' => $this->argument('name'),
-                    'email' => $this->argument('email'),
-                    'password' => $this->argument('password') ?? Str::random(8)
+                    'name' => $name,
+                    'email' => $email,
+                    'password' => $password
                 ]
             );
             $this->info("User created succesfully!!");
-        }
     }
 }
