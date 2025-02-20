@@ -37,7 +37,7 @@
     "Go Back": "Go Back",
     "Changes successfully made": "Changes successfully made",
     "Here you can see your saved workouts.": "Here you can see your saved workouts.",
-    "You haven't created any workouts yet.": "You haven't created any workouts yet.",
+    "You havent created any workouts yet.": "You havent created any workouts yet.",
     "Add new workout": "Add new workout",
     "Create New Workout": "Create New Workout",
     "Create Workout": "Create Workout",
@@ -45,7 +45,7 @@
     "View workout": "View workout",
     "Go to news feed": "Go to news feed",
     "Welcome back,": "Welcome back,",
-    "We're happy to see you again. Explore the latest news and stay connected with your friends.": "We're happy to see you again. Explore the latest news and stay connected with your friends.",
+    "We are happy to see you again. Explore the latest news and stay connected with your friends.": "We are happy to see you again. Explore the latest news and stay connected with your friends.",
     "Edit": "Edit",
     "Edit Exercise": "Edit Exercise",
     "Delete": "Delete",
@@ -65,5 +65,8 @@
     "If you want to change the image, select a new one. If not, leave this field empty.": "If you want to change the image, select a new one. If not, leave this field empty.",
     "Enter only the video ID (for example, in \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\", the ID is \"dQw4w9WgXcQ\").": "Enter only the video ID (for example, in \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\", the ID is \"dQw4w9WgXcQ\").",
     "Image (optional)": "Image (optional)",
-    "Your browser does not support the video tag.": "Your browser does not support the video tag."
+    "Your browser does not support the video tag.": "Your browser does not support the video tag.",
+    "Save Image": "Save Image",
+    "Reps": "Reps",
+    "Save": "Save"
 }

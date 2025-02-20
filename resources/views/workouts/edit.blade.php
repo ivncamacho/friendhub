@@ -35,7 +35,10 @@
                             @endforeach
                         </select>
                         <input type="number" name="exercises[{{ $index }}][sets]" value="{{ $exercise->pivot->sets }}" placeholder="{{__('Sets')}}" required class="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                        <input type="number" name="exercises[{{ $index }}][reps]" value="{{ $exercise->pivot->reps }}" placeholder="Repeticiones" required class="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <input type="number" name="exercises[{{ $index }}][reps]" value="{{ $exercise->pivot->reps }}" placeholder="{{__('Reps')}}" required class="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <button type="button" onclick="removeExercise(this)" class="mt-2 bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">
+                            {{__('Delete')}}
+                        </button>
                     </div>
                 @endforeach
             </div>
@@ -52,8 +55,8 @@
 </div>
 
 <script>
-    let exerciseIndex = {{ count($workout->exercises) }}; // Iniciar el índice para los ejercicios adicionales
-    const exercises = @json($exercises); // Pasar los ejercicios como JSON desde Blade
+    let exerciseIndex = {{ count($workout->exercises) }};
+    const exercises = @json($exercises);
 
     function addExercise() {
         let container = document.getElementById('exercise-container');
@@ -62,7 +65,7 @@
 
         let options = exercises.map(exercise => {
             return `<option value="${exercise.id}" class="text-black">${exercise.title}</option>`;
-        }).join(''); // Convertir el array a un string de opciones HTML
+        }).join('');
 
         newGroup.innerHTML = `
         <select name="exercises[${exerciseIndex}][exercise_id]" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-[#1e293b]">
@@ -73,6 +76,10 @@
     `;
         container.appendChild(newGroup);
         exerciseIndex++;
+    }
+    function removeExercise(button) {
+        let exerciseGroup = button.parentElement;
+        exerciseGroup.remove();
     }
 </script>
 </x-auth-layout>

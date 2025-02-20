@@ -38,7 +38,7 @@ class DragDrop extends Component
 
         session()->flash('message', 'Imagen subida y guardada correctamente.');
 
-        // Limpiar la variable después de guardar
+
         $this->reset('profile_photo');
     }
 

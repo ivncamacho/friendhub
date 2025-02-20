@@ -37,7 +37,7 @@
     "Go Back": "Volver atrás",
     "Changes successfully made": "Cambios efectuados correctamente",
     "Here you can see your saved workouts.": "Aquí puedes ver tus entrenamientos guardados.",
-    "You haven't created any workouts yet.": "Aún no has creado entrenamientos.",
+    "You havent created any workouts yet.": "Aún no has creado entrenamientos.",
     "Add new workout": "Añadir nuevo entrenamiento",
     "Create New Workout": "Crear Nuevo Entrenamiento",
     "Create Workout": "Crear Entrenamiento",
@@ -45,7 +45,7 @@
     "View workout": "Ver entrenamiento",
     "Go to news feed": "Ir al feed de noticias",
     "Welcome back,": "Bienvenido/a de nuevo,",
-    "We're happy to see you again. Explore the latest news and stay connected with your friends.": "Nos alegra verte nuevamente. Explora las últimas novedades y mantente conectado con tus amigos.",
+    "We are happy to see you again. Explore the latest news and stay connected with your friends.": "Nos alegra verte nuevamente. Explora las últimas novedades y mantente conectado con tus amigos.",
     "Edit": "Editar",
     "Edit Exercise": "Editar Ejercicio",
     "Delete": "Eliminar",
@@ -65,5 +65,8 @@
     "If you want to change the image, select a new one. If not, leave this field empty.": "Si deseas cambiar la imagen, selecciona una nueva. Si no, deja este campo vacío.",
     "Enter only the video ID (for example, in \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\", the ID is \"dQw4w9WgXcQ\").": "Ingresa solo el ID del video (por ejemplo, en \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\", el ID es \"dQw4w9WgXcQ\").",
     "Image (optional)": "Imagen (opcional)",
-    "Your browser does not support the video tag.": "Tu navegador no soporta la etiqueta de video."
+    "Your browser does not support the video tag.": "Tu navegador no soporta la etiqueta de video.",
+    "Save Image": "Guardar Imagen",
+    "Reps": "Repeticiones",
+    "Save": "Guardar"
 }
