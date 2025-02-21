@@ -30,17 +30,13 @@ class ExerciseController extends Controller
     }
     public function store(ExerciseRequest $request)
     {
-
         $fileName = null;
 
         if ($request->hasFile('media')) {
-            // Obtener el archivo de la imagen
             $file = $request->file('media');
 
-            // Definir la ruta donde se almacenará la imagen en public/assets/img/exercises/
             $fileName =  Str::random(20) . '.' . $file->getClientOriginalExtension();
 
-            // Mover la imagen a la carpeta pública
             $file->move(public_path('assets/img/exercises'), $fileName);
         }
 

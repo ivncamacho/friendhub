@@ -138,7 +138,7 @@ it('deletes a workout', function () {
     $this->actingAs($user);
     $workout = Workout::factory()->create(['user_id' => $user->id]);
 
-    $response = $this->delete(route('workouts.destroy', $workout->id));
+    $response = $this->delete(route('workouts.destroyFeed', $workout->id));
 
     $response->assertRedirect(route('feed'));
     $this->assertDatabaseMissing('workouts', ['id' => $workout->id]);

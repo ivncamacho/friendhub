@@ -48,7 +48,7 @@ it('should create a workout', function () {
         'title' => 'New Workout',
         'description' => 'Description of the workout',
         'exercises' => [
-            ['exercise_id' => $exercise1->id, 'sets' => 3, 'reps' => 10], // Incluir 'sets' y 'reps'
+            ['exercise_id' => $exercise1->id, 'sets' => 3, 'reps' => 10],
             ['exercise_id' => $exercise2->id, 'sets' => 4, 'reps' => 12],
             ['exercise_id' => $exercise3->id, 'sets' => 5, 'reps' => 8],
         ],
