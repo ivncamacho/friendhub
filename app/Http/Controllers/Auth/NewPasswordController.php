@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+use App\Http\Requests\NewPasswordRequest;
 
 class NewPasswordController extends Controller
 {
@@ -16,13 +16,8 @@ class NewPasswordController extends Controller
         return view('my-auth.reset-password', ['request' => $request]);
     }
 
-    public function store(Request $request)
+    public function store(NewPasswordRequest $request)
     {
-        $request->validate([
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
 
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),

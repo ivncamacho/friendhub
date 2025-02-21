@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\WorkoutPublished;
-use App\Jobs\GenerateWorkoutPDF;
+use App\Http\Requests\WorkoutRequest;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Models\Workout;
@@ -40,16 +40,9 @@ class WorkoutController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(WorkoutRequest $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'exercises' => 'required|array',
-            'exercises.*.exercise_id' => 'required|exists:exercises,id',
-            'exercises.*.sets' => 'required|integer|min:1',
-            'exercises.*.reps' => 'required|integer|min:1',
-        ]);
+
 
         $workout = Workout::create([
             'title' => $request->title,
@@ -88,21 +81,10 @@ class WorkoutController extends Controller
         return view('workouts.edit', compact('workout', 'exercises'));
     }
 
-    public function update(Request $request, $id)
+    public function update(WorkoutRequest $request, $id)
     {
         $workout = Workout::findOrFail($id);
         $this->authorize('authorWorkout', $workout);
-
-
-        // Validación de los datos
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'exercises' => 'required|array',
-            'exercises.*.exercise_id' => 'required|exists:exercises,id',
-            'exercises.*.sets' => 'required|integer|min:1',
-            'exercises.*.reps' => 'required|integer|min:1',
-        ]);
 
         // Actualiza el título y la descripción del entrenamiento
         $workout->update([

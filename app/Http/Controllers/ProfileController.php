@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,14 +17,9 @@ class ProfileController extends Controller
         return view('profile.edit');
     }
 
-    public function update(Request $request)
+    public function update(ProfileRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:users,name,' . auth()->id(),
-            'email' => 'required|string|email|max:255|unique:users,email,' . auth()->id(),
-            'password' => 'nullable|string|min:8|confirmed',
-            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        $validated = $request->validated();
 
         // Obtener el usuario autenticado
         $user = auth()->user();

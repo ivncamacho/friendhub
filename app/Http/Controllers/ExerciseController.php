@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ExercisePublished;
+use App\Http\Requests\ExerciseRequest;
 use App\Jobs\ExportDailyExercises;
 use App\Models\Exercise;
 use Illuminate\Http\Request;
@@ -27,14 +28,8 @@ class ExerciseController extends Controller
 
         return view('exercise.show', compact('exercise'));
     }
-    public function store(Request $request)
+    public function store(ExerciseRequest $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'youtube_video_id' => 'nullable|string|max:255',
-        ]);
 
         $fileName = null;
 
@@ -90,19 +85,10 @@ class ExerciseController extends Controller
         return view('exercise.edit', compact('exercise'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ExerciseRequest $request, $id)
     {
         $exercise = Exercise::findOrFail($id);
         $this->authorize('authorExercise', $exercise);
-
-
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'youtube_video_id' => 'nullable|string|max:255',
-        ]);
-
 
         $exercise->title = $request->title;
         $exercise->description = $request->description;

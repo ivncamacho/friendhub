@@ -49,7 +49,7 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => trans('Credenciales incorrectas', ),
             ]);
         }
 
@@ -57,6 +57,8 @@ class LoginRequest extends FormRequest
 
         RateLimiter::clear($this->throttleKey());
     }
+
+
 
     /**
      * Ensure the login request is not rate limited.

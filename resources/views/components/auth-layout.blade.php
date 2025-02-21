@@ -10,11 +10,6 @@
 </head>
 <body class="bg-[#022133] flex items-center justify-center min-h-screen ">
 
-@session('status')
-<div class="bg-green-600 p-4 text-xl text-green-50 dark:bg-green-800">
-    {{ $value }}
-</div>
-@endsession
 
 <main>
     {{ $slot }}
