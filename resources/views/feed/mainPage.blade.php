@@ -29,7 +29,7 @@
                         <a href="{{ route('workouts.edit', $workout->id) }}" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600">
                             <i class="fas fa-edit"></i> {{__('Edit')}}
                         </a>
-                        <form action="{{ route('workouts.destroy', $workout->id) }}" method="POST" class="inline">
+                        <form action="{{ route('workouts.destroyFeed', $workout->id) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600">

@@ -125,7 +125,7 @@ class WorkoutController extends Controller
         return redirect()->route('workouts.show', $workout->id)->with('success', 'Entrenamiento actualizado correctamente.');
     }
 
-    public function destroy($id)
+    public function destroyFeed($id)
     {
         $workout = Workout::findOrFail($id);
         $this->authorize('authorWorkout', $workout);
@@ -134,7 +134,15 @@ class WorkoutController extends Controller
 
         return redirect()->route('feed')->with('success', 'Entrenamiento eliminado correctamente.');
     }
+    public function destroyMy($id)
+    {
+        $workout = Workout::findOrFail($id);
+        $this->authorize('authorWorkout', $workout);
 
+        $workout->delete();
+
+        return redirect()->route('myworkouts')->with('success', 'Entrenamiento eliminado correctamente.');
+    }
     public function GeneratePDF($id)
     {
         $workout = Workout::findOrFail($id);

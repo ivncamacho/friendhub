@@ -45,7 +45,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/workouts/{id}/edit', [WorkoutController::class, 'edit'])->name('workouts.edit');
     Route::put('/workouts/{id}', [WorkoutController::class, 'update'])->name('workouts.update');
-    Route::delete('/workouts/{id}', [WorkoutController::class, 'destroy'])->name('workouts.destroy');
+    Route::delete('/workoutsFeed/{id}', [WorkoutController::class, 'destroyFeed'])->name('workouts.destroyFeed');
+    Route::delete('/workoutsMy/{id}', [WorkoutController::class, 'destroyMy'])->name('workouts.destroyMy');
     Route::get('/workouts/pdf/{id}' , [WorkoutController::class, 'GeneratePDF'])->name('workout.pdf');
 
 

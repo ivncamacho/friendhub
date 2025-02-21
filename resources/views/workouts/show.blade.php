@@ -3,6 +3,12 @@
     <x-nav-bar />
 
     <div class="pt-24 pb-12 bg-[#022133]">
+        <div class="mb-6 text-left ml-24">
+            <a href="{{ route('feed') }}"
+               class="bg-[#04475F] hover:bg-[#05627F] text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300">
+                ← {{__('Go Back')}}
+            </a>
+        </div>
         <div class="container mx-auto px-4 max-w-2xl">
             <div class="bg-[#033047] p-6 rounded-lg shadow-lg">
 
