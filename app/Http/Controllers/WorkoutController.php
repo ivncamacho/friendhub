@@ -46,16 +46,27 @@ class WorkoutController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'exercises' => 'required|array',
+            'exercises.*.exercise_id' => 'required|exists:exercises,id',
+            'exercises.*.sets' => 'required|integer|min:1',
+            'exercises.*.reps' => 'required|integer|min:1',
         ]);
 
         $workout = Workout::create([
             'title' => $request->title,
             'description' => $request->description,
-            'exercises' => $request->exercises,
             'user_id' => Auth::id(),
         ]);
 
-        $workout->exercises()->attach($request->exercises);
+        $exercises = collect($request->exercises)->mapWithKeys(function ($exercise) {
+            return [
+                $exercise['exercise_id'] => [
+                    'sets' => $exercise['sets'],
+                    'reps' => $exercise['reps'],
+                ],
+            ];
+        });
+
+        $workout->exercises()->attach($exercises);
         event(new WorkoutPublished($workout));
         return redirect()->route('feed')->with('status', 'Entrenamiento creado con éxito.');
     }
