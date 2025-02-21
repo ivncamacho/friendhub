@@ -28,9 +28,8 @@ class WorkoutController extends Controller
     public function show($id)
     {
         $workout = Workout::with('exercises')->findOrFail($id);
-        GenerateWorkoutPdf::dispatch($workout);
-        return view('workouts.show', compact('workout'));
 
+        return view('workouts.show', compact('workout'));
     }
 
     public function create()

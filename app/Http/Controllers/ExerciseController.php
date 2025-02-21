@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Events\ExercisePublished;
+use App\Jobs\ExportDailyExercises;
 use App\Models\Exercise;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExerciseController extends Controller
 {
@@ -58,6 +60,7 @@ class ExerciseController extends Controller
 
         event(new ExercisePublished($exercise));
 
+        ExportDailyExercises::dispatch();
         return redirect()->route('famous-workouts')->with('success', 'Ejercicio creado correctamente.');
     }
 
@@ -128,6 +131,7 @@ class ExerciseController extends Controller
 
         $exercise->delete();
 
-        return redirect()->route('famous-workouts')->with('success', 'Ejercicio eliminado correctamente.');    }
+        return redirect()->route('famous-workouts')->with('success', 'Ejercicio eliminado correctamente.');
+    }
 
 }
