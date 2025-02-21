@@ -27,5 +27,8 @@ class Workout extends Model
             ->withPivot('sets', 'reps')
             ->withTimestamps();
     }
-
+public function scopeMyWorkouts($query, $userId)
+    {
+        return $query->where('user_id', $userId)->orderBy('created_at', 'desc');
+    }
 }

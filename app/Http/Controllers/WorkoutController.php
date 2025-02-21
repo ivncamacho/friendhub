@@ -66,9 +66,7 @@ class WorkoutController extends Controller
     public function myWorkouts()
     {
         $userId = Auth::id();
-        $workouts = Workout::where('user_id', $userId)
-            ->orderBy('created_at', 'desc') // Ordenar del más nuevo al más antiguo
-            ->get();
+        $workouts = Workout::myWorkouts($userId)->get();
 
         return view('myworkouts', compact('workouts'));
     }
