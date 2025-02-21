@@ -136,7 +136,7 @@ class WorkoutController extends Controller
         ];
 
         $doc = pdf::loadView('workouts.pdf', $data);
-
+        Log:info("public/assets/img/exercises/" . $workout->exercises[0]->media);
         return $doc->download('workout_' . $id .'.pdf');
     }
 }

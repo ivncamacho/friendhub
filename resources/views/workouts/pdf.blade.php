@@ -91,8 +91,6 @@
             <div class="exercise">
                 <h3>{{ $exercise->title }}</h3>
                 <p>{{__('Sets')}}: <strong>{{ $exercise->pivot->sets }}</strong> | {{__('Reps')}}: <strong>{{ $exercise->pivot->reps }}</strong></p>
-                <img src="{{  $exercise->media }}"
-                     alt="Imagen de {{ $exercise->title }}">
             </div>
         @endforeach
     </div>
