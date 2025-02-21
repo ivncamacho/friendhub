@@ -15,8 +15,7 @@ class ExerciseSearch extends Component
     public function render()
     {
 
-        $exercises = Exercise::where('title', 'like', '%' . $this->search . '%')
-            ->paginate(12);
+        $exercises = Exercise::search()->paginate(12);
 
         return view('livewire.exercise-search', compact('exercises'));
     }

@@ -39,5 +39,8 @@ class Exercise extends Model
             ->withPivot('sets', 'reps')
             ->withTimestamps();
     }
-
+    public function scopeSearch($query)
+    {
+        return $query->where('title', 'like', '%' . request('search') . '%');
+    }
 }
