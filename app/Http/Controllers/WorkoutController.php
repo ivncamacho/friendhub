@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\WorkoutPublished;
 use App\Http\Requests\WorkoutRequest;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
+use App\Jobs\GenerateWorkoutPDF;
 use App\Models\Workout;
 use App\Models\Exercise;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +27,7 @@ class WorkoutController extends Controller
     public function show($id)
     {
         $workout = Workout::with('exercises')->findOrFail($id);
+        GenerateWorkoutPdf::dispatch($workout);
 
         return view('workouts.show', compact('workout'));
     }
@@ -125,12 +125,7 @@ class WorkoutController extends Controller
     }
     public function GeneratePDF($id)
     {
-        $workout = Workout::findOrFail($id);
-        $exercises = $workout->exercises;
-
-
-
-        $doc = pdf::loadView('workouts.pdf', compact('workout'));
-        return $doc->download('workout_' . $id .'.pdf');
+    $pdfPath="pdfs/workout_" . $id . ".pdf";
+        return response()->download(public_path($pdfPath));
     }
 }

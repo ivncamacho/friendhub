@@ -62,8 +62,8 @@
             margin: 5px 0;
         }
         .exercise img {
-            width: 200px;
-            height: 400px;
+            width: 400px;
+            height: 200px;
             border-radius: 5px;
             margin-top: 10px;
         }
