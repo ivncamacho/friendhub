@@ -128,13 +128,9 @@ class WorkoutController extends Controller
         $workout = Workout::findOrFail($id);
         $exercises = $workout->exercises;
 
-        $data = [
-            'workout' => $workout,
-            'exercises' => $exercises
-        ];
 
-        $doc = pdf::loadView('workouts.pdf', $data);
-        Log:info("public/assets/img/exercises/" . $workout->exercises[0]->media);
+
+        $doc = pdf::loadView('workouts.pdf', compact('workout'));
         return $doc->download('workout_' . $id .'.pdf');
     }
 }

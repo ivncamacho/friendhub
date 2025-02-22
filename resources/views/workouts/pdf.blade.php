@@ -62,8 +62,8 @@
             margin: 5px 0;
         }
         .exercise img {
-            width: 50%;
-            height: 50%;
+            width: 200px;
+            height: 400px;
             border-radius: 5px;
             margin-top: 10px;
         }
@@ -91,6 +91,7 @@
             <div class="exercise">
                 <h3>{{ $exercise->title }}</h3>
                 <p>{{__('Sets')}}: <strong>{{ $exercise->pivot->sets }}</strong> | {{__('Reps')}}: <strong>{{ $exercise->pivot->reps }}</strong></p>
+                <img src="{{ public_path('assets/img/exercises/' . $exercise->media) }}" alt="{{ $exercise->title }}" >
             </div>
         @endforeach
     </div>
