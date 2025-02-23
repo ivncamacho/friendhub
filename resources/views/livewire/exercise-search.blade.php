@@ -10,7 +10,7 @@
         @foreach ($exercises as $exercise)
             <div class="exercise-item relative bg-[#033047] p-6 rounded-lg shadow-lg hover:scale-105 hover:bg-[#044766] transform transition-transform duration-300">
                 @auth
-                    @if(auth()->user()->hasRole('admin') || $exercise->user_id == auth()->id())
+                    @if(Gate::allows('authorExercise', $exercise))
                         <div class="absolute top-4 right-4 flex space-x-4">
                             <a href="{{ route('exercise.edit', $exercise->id) }}" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600">
                                 <i class="fas fa-edit"></i> {{ __('Edit') }}

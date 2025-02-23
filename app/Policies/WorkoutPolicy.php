@@ -12,7 +12,7 @@ class WorkoutPolicy
 
     public function authorWorkout(User $user, Workout $workout)
     {
-        if ($user->id == $workout->user_id || $user->role == 'admin') {
+        if ($user->id == $workout->user_id || $user->hasRole('admin')) {
             return true;
         } else {
             return false;
