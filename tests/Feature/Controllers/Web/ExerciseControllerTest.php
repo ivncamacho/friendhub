@@ -1,11 +1,9 @@
 <?php
 
-use App\Models\User;
 use App\Models\Exercise;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-
 
 it('shows the exercise creation page', function () {
     $user = User::factory()->create();
@@ -16,8 +14,6 @@ it('shows the exercise creation page', function () {
     $response->assertStatus(200);
     $response->assertViewIs('exercise.create');
 });
-
-
 
 it('lists all exercises', function () {
     $user = User::factory()->create();
@@ -85,7 +81,6 @@ it('stores an exercise with an image', function () {
     $filePath = public_path("assets/img/exercises/{$exercise->media}");
     expect(file_exists($filePath))->toBeTrue();
 });
-
 
 it('allows users to edit their own exercises', function () {
     $user = User::factory()->create();
@@ -267,4 +262,3 @@ it('updates an exercise with a new image', function () {
     $filePath = public_path("assets/img/exercises/{$exercise->media}");
     expect(file_exists($filePath))->toBeTrue();
 });
-

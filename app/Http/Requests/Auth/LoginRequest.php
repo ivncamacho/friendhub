@@ -45,11 +45,11 @@ class LoginRequest extends FormRequest
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
 
-        if (!$user || !Auth::validate($credentials)) {
+        if (! $user || ! Auth::validate($credentials)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('Credenciales incorrectas', ),
+                'email' => trans('Credenciales incorrectas'),
             ]);
         }
 
@@ -57,8 +57,6 @@ class LoginRequest extends FormRequest
 
         RateLimiter::clear($this->throttleKey());
     }
-
-
 
     /**
      * Ensure the login request is not rate limited.

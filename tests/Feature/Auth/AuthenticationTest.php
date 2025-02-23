@@ -14,7 +14,6 @@ it('renders the login view', function () {
     $response->assertViewIs('my-auth.login');
 });
 
-
 it('users can authenticate using the login screen', function () {
     $user = User::factory()->create([
         'password' => '12345678',
@@ -51,7 +50,6 @@ it('users can logout', function () {
     $this->assertGuest();
     $response->assertRedirect('/');
 });
-
 
 it('session is regenerated on login', function () {
     Session::start();

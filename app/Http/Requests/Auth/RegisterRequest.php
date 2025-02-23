@@ -5,6 +5,7 @@ namespace App\Http\Requests\Auth;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules;
+
 class RegisterRequest extends FormRequest
 {
     /**
@@ -28,10 +29,11 @@ class RegisterRequest extends FormRequest
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
     }
+
     public function messages()
     {
-        return[
-          'name.required' => 'Name is required',
+        return [
+            'name.required' => 'Name is required',
             'name.unique' => 'Name is already taken',
             'email.required' => 'Email is required',
             'email.unique' => 'Email is already taken',

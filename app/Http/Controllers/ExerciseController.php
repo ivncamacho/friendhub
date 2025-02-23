@@ -6,26 +6,27 @@ use App\Events\ExercisePublished;
 use App\Http\Requests\ExerciseRequest;
 use App\Jobs\ExportDailyExercises;
 use App\Models\Exercise;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Str;
-use Maatwebsite\Excel\Facades\Excel;
 
 class ExerciseController extends Controller
 {
     use AuthorizesRequests;
+
     public function index()
     {
         $exercises = Exercise::paginate(12);
 
         return view('famous-workouts', compact('exercises'));
     }
+
     public function show($id)
     {
         $exercise = Exercise::findOrFail($id);
 
         return view('exercise.show', compact('exercise'));
     }
+
     public function store(ExerciseRequest $request)
     {
         $fileName = null;
@@ -33,11 +34,10 @@ class ExerciseController extends Controller
         if ($request->hasFile('media')) {
             $file = $request->file('media');
 
-            $fileName =  Str::random(20) . '.' . $file->getClientOriginalExtension();
+            $fileName = Str::random(20).'.'.$file->getClientOriginalExtension();
 
             $file->move(public_path('assets/img/exercises'), $fileName);
         }
-
 
         $exercise = Exercise::create([
             'title' => $request->title,
@@ -50,9 +50,9 @@ class ExerciseController extends Controller
         event(new ExercisePublished($exercise));
 
         ExportDailyExercises::dispatch();
+
         return redirect()->route('famous-workouts')->with('success', 'Ejercicio creado correctamente.');
     }
-
 
     public function create()
     {
@@ -76,10 +76,9 @@ class ExerciseController extends Controller
         $exercise->description = $request->description;
         $exercise->youtube_video_id = $request->youtube_video_id;
 
-
         if ($request->hasFile('media')) {
 
-            $fileName = time() . '.' . $request->file('media')->getClientOriginalExtension();
+            $fileName = time().'.'.$request->file('media')->getClientOriginalExtension();
 
             $request->file('media')->move(public_path('assets/img/exercises'), $fileName);
 
@@ -91,7 +90,6 @@ class ExerciseController extends Controller
         return redirect()->route('exercise.show', $exercise->id)->with('success', 'Ejercicio actualizado correctamente');
     }
 
-
     public function destroy($id)
     {
         $exercise = Exercise::findOrFail($id);
@@ -101,5 +99,4 @@ class ExerciseController extends Controller
 
         return redirect()->route('famous-workouts')->with('success', 'Ejercicio eliminado correctamente.');
     }
-
 }

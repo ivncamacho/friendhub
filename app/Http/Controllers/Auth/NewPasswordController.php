@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NewPasswordRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\NewPasswordRequest;
+use Illuminate\Support\Facades\Password;
 
 class NewPasswordController extends Controller
 {

@@ -38,7 +38,6 @@ it('should create a workout', function () {
     $user = User::factory()->create();
     $this->actingAs($user, 'sanctum');
 
-
     $exercise1 = Exercise::factory()->create();
     $exercise2 = Exercise::factory()->create();
     $exercise3 = Exercise::factory()->create();
@@ -54,15 +53,12 @@ it('should create a workout', function () {
         ],
     ];
 
-
     $response = $this->postJson('/api/workouts', $data);
-
 
     $response->assertStatus(201);
     $response->assertJson([
         'message' => 'Entrenamiento creado con éxito',
     ]);
-
 
     $this->assertDatabaseHas('workouts', [
         'title' => 'New Workout',
@@ -97,7 +93,6 @@ it('should update a workout', function () {
     $user = User::factory()->create();
     $workout = Workout::factory()->create(['user_id' => $user->id]);
 
-
     $exercise1 = Exercise::factory()->create();
     $exercise2 = Exercise::factory()->create();
 
@@ -116,7 +111,6 @@ it('should update a workout', function () {
     $response->assertJson([
         'message' => 'Entrenamiento actualizado correctamente',
     ]);
-
 
     $this->assertDatabaseHas('workouts', [
         'id' => $workout->id,

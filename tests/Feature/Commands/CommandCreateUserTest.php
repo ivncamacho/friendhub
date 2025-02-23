@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
 
 it('should create a user with the required arguments', function () {
@@ -44,7 +43,6 @@ it('should fail to create a user with a duplicate name', function () {
     $user = User::where('name', $name)->first();
     $this->assertEquals($existingUser->id, $user->id);
 });
-
 
 it('should fail to create a user with a duplicate email', function () {
     // Arrange

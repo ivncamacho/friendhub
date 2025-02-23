@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\Exercise;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Exercise;
 
 class ExerciseSearch extends Component
 {
@@ -19,6 +19,7 @@ class ExerciseSearch extends Component
 
         return view('livewire.exercise-search', compact('exercises'));
     }
+
     public function updatedSearch()
     {
         $this->resetPage();

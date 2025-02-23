@@ -13,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasApiTokens, HasRoles;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -49,9 +49,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
     public function exercises(): HasMany
     {
         return $this->hasMany(Exercise::class);
     }
-
 }

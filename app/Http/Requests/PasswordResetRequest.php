@@ -3,9 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Validation\ValidationException;
 
 class PasswordResetRequest extends FormRequest
 {
@@ -28,12 +25,12 @@ class PasswordResetRequest extends FormRequest
             'email' => ['required', 'email'],
         ];
     }
+
     public function messages()
     {
-        return[
+        return [
             'email.required' => 'Email is required',
             'email.email' => 'Email is invalid',
-            ];
+        ];
     }
-
 }

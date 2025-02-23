@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\User;
-use Illuminate\Support\Facades\Artisan;
 
 it('should create an exercise when authenticated with correct credentials', function () {
     $user = User::factory()->create([
@@ -59,4 +58,3 @@ it('should fail to create an exercise without title argument', function () {
         ->expectsOutput('Title and description is required.')
         ->assertExitCode(1);
 });
-

@@ -3,9 +3,7 @@
 use App\Events\ExercisePublished;
 use App\Models\Exercise;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
-
 
 it('should list all exercises', function () {
     $user = User::factory()->create();
@@ -16,7 +14,6 @@ it('should list all exercises', function () {
 
     $response->assertStatus(200)->assertJsonCount(3);
 });
-
 
 it('should show a specific exercise', function () {
     $user = User::factory()->create();
@@ -29,7 +26,6 @@ it('should show a specific exercise', function () {
     $response->assertStatus(200)->assertJson(['id' => $exercise->id]);
 });
 
-
 it('should create an exercise and dispatch ExercisePublished event', function () {
     Event::fake();
 
@@ -39,7 +35,7 @@ it('should create an exercise and dispatch ExercisePublished event', function ()
         'title' => 'New Exercise',
         'description' => 'Exercise description',
         'media' => 'example.jpg',
-        'youtube_video_id' => 'xyz123'
+        'youtube_video_id' => 'xyz123',
     ]);
 
     $response->assertStatus(201)->assertJsonStructure(['message', 'exercise']);
@@ -55,7 +51,7 @@ it('should update an exercise', function () {
         'title' => 'Updated Title',
         'description' => 'Updated description',
         'media' => 'updated.jpg',
-        'youtube_video_id' => 'abc456'
+        'youtube_video_id' => 'abc456',
     ]);
 
     $response->assertStatus(200)->assertJsonFragment(['title' => 'Updated Title']);

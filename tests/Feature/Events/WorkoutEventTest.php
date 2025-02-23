@@ -5,10 +5,10 @@ use App\Listeners\SendWorkoutPublishedEmail;
 use App\Mail\WorkoutPublishedMail;
 use App\Models\User;
 use App\Models\Workout;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Queue;
-use Illuminate\Broadcasting\PrivateChannel;
 
 it('should dispatch the WorkoutPublished event when a workout is created', function () {
     Event::fake();
@@ -57,7 +57,7 @@ it('should send an email when WorkoutPublished event is handled', function () {
     auth()->login($user);
 
     $event = new WorkoutPublished($workout);
-    $listener = new SendWorkoutPublishedEmail();
+    $listener = new SendWorkoutPublishedEmail;
     $listener->handle($event);
 
     Mail::assertSent(WorkoutPublishedMail::class, function ($mail) use ($user) {

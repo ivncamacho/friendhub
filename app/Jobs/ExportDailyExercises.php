@@ -3,8 +3,6 @@
 namespace App\Jobs;
 
 use App\Exports\ExercisesExport;
-use App\Models\Exercise;
-use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Maatwebsite\Excel\Facades\Excel;
@@ -26,7 +24,7 @@ class ExportDailyExercises implements ShouldQueue
      */
     public function handle(): void
     {
-        $fileName = 'daily-reports/report_' . now()->format('Y_m_d') . '.xlsx';
-        Excel::store(new ExercisesExport(), $fileName, 'public');
-     }
+        $fileName = 'daily-reports/report_'.now()->format('Y_m_d').'.xlsx';
+        Excel::store(new ExercisesExport, $fileName, 'public');
+    }
 }

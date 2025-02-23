@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Workout;
 use App\Models\User;
+use App\Models\Workout;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class WorkoutFactory extends Factory

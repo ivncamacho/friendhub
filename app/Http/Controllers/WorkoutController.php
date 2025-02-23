@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Events\WorkoutPublished;
 use App\Http\Requests\WorkoutRequest;
 use App\Jobs\GenerateWorkoutPDF;
-use App\Models\Workout;
 use App\Models\Exercise;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Workout;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class WorkoutController extends Controller
 {
     use AuthorizesRequests;
+
     public function index()
     {
         $workouts = Workout::select('id', 'title', 'user_id', 'created_at')
@@ -22,7 +23,6 @@ class WorkoutController extends Controller
 
         return view('feed.mainPage', compact('workouts'));
     }
-
 
     public function show($id)
     {
@@ -39,10 +39,8 @@ class WorkoutController extends Controller
         return view('workouts.create', compact('exercises'));
     }
 
-
     public function store(WorkoutRequest $request)
     {
-
 
         $workout = Workout::create([
             'title' => $request->title,
@@ -61,8 +59,10 @@ class WorkoutController extends Controller
 
         $workout->exercises()->attach($exercises);
         event(new WorkoutPublished($workout));
+
         return redirect()->route('feed')->with('status', 'Entrenamiento creado con éxito.');
     }
+
     public function myWorkouts()
     {
         $userId = Auth::id();
@@ -70,6 +70,7 @@ class WorkoutController extends Controller
 
         return view('myworkouts', compact('workouts'));
     }
+
     public function edit($id)
     {
         $workout = Workout::findOrFail($id);
@@ -114,6 +115,7 @@ class WorkoutController extends Controller
 
         return redirect()->route('feed')->with('success', 'Entrenamiento eliminado correctamente.');
     }
+
     public function destroyMy($id)
     {
         $workout = Workout::findOrFail($id);
@@ -123,9 +125,11 @@ class WorkoutController extends Controller
 
         return redirect()->route('myworkouts')->with('success', 'Entrenamiento eliminado correctamente.');
     }
+
     public function GeneratePDF($id)
     {
-    $pdfPath="pdfs/workout_" . $id . ".pdf";
+        $pdfPath = 'pdfs/workout_'.$id.'.pdf';
+
         return response()->download(public_path($pdfPath));
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules;
+
 class NewPasswordRequest extends FormRequest
 {
     /**
@@ -27,10 +28,11 @@ class NewPasswordRequest extends FormRequest
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
     }
+
     public function messages()
     {
         return [
-          'token.required' => 'El token es requerido',
+            'token.required' => 'El token es requerido',
             'email.required' => 'El email es requerido',
             'password.required' => 'La contraseña es requerida',
             'password.confirmed' => 'Las contraseñas no coinciden',

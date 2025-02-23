@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ExerciseController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\WorkoutController;
-
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('users')->group(function () {
     Route::get('/', [ProfileController::class, 'index']);
@@ -13,10 +12,8 @@ Route::prefix('users')->group(function () {
     Route::delete('{id}', [ProfileController::class, 'destroy']);
 });
 
-
 Route::post('/login', [ProfileController::class, 'login']);
 Route::post('/register', [ProfileController::class, 'store']);
-
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('exercises')->group(function () {
@@ -26,7 +23,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('{id}', [ExerciseController::class, 'update']);
         Route::delete('{id}', [ExerciseController::class, 'destroy']);
     });
-
 
     Route::prefix('workouts')->group(function () {
         Route::get('/', [WorkoutController::class, 'index']);

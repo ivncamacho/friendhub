@@ -37,7 +37,7 @@ it('should create a user successfully', function () {
         'user' => [
             'name' => 'John Doe',
             'email' => 'john@example.com',
-        ]
+        ],
     ]);
 });
 
@@ -58,10 +58,9 @@ it('should update a user successfully', function () {
         'user' => [
             'name' => 'Updated Name',
             'email' => 'updated@example.com',
-        ]
+        ],
     ]);
 });
-
 
 it('should not update another user without permission', function () {
     $user1 = User::factory()->create();
@@ -81,7 +80,6 @@ it('should not update another user without permission', function () {
     ]);
 });
 
-
 it('should delete a user successfully', function () {
     $user = User::factory()->create();
     $this->actingAs($user, 'sanctum');
@@ -91,7 +89,6 @@ it('should delete a user successfully', function () {
     $response->assertStatus(200);
     $response->assertJson(['message' => 'Usuario eliminado correctamente']);
 });
-
 
 it('should not delete another user without permission', function () {
     $user1 = User::factory()->create();
@@ -105,7 +102,6 @@ it('should not delete another user without permission', function () {
         'message' => 'You do not have permission to perform this action.',
     ]);
 });
-
 
 it('should login successfully', function () {
     $user = User::factory()->create([

@@ -28,10 +28,11 @@ class ExerciseRequest extends FormRequest
             'youtube_video_id' => 'nullable|string|max:255',
         ];
     }
+
     public function messages()
     {
         return [
-          'title.required' => 'El título es obligatorio',
+            'title.required' => 'El título es obligatorio',
             'title.max' => 'El título no puede tener más de 255 caracteres',
             'description.required' => 'La descripción es obligatoria',
             'media.image' => 'El archivo debe ser una imagen',

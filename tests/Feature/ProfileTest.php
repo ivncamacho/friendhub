@@ -61,4 +61,3 @@ it('user can delete their account', function () {
 
     $this->assertGuest();
 });
-

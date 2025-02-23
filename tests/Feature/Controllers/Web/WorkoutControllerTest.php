@@ -1,12 +1,10 @@
 <?php
 
+use App\Events\WorkoutPublished;
 use App\Models\Exercise;
 use App\Models\User;
 use App\Models\Workout;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
-use App\Events\WorkoutPublished;
-
 
 it('shows the workout create page', function () {
     $user = User::factory()->create();

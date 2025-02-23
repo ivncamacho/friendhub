@@ -32,12 +32,13 @@ class CreateExerciseCommand extends Command
         $password = $this->secret('Escribe la contraseña');
 
         $user = User::where('email', $email)->first();
-        if (!Auth::attempt(['email' => $email, 'password' => $password])) {
+        if (! Auth::attempt(['email' => $email, 'password' => $password])) {
 
             $this->error('Incorrect credentials.');
+
             return 1;
         } else {
-            $this->info("Loggued as " . $user->name);
+            $this->info('Loggued as '.$user->name);
 
             $title = $this->ask('Escribe el titulo del ejercicio');
             $description = $this->ask('Escribe la descripcion del ejercicio');
@@ -46,6 +47,7 @@ class CreateExerciseCommand extends Command
 
             if (empty($title) || empty($description)) {
                 $this->error('Title and description is required.');
+
                 return 1;
             }
 
@@ -53,11 +55,12 @@ class CreateExerciseCommand extends Command
                 'title' => $title,
                 'description' => $description,
                 'media' => $media,
-                'youtube_video_id'=> $youtube_video_id,
+                'youtube_video_id' => $youtube_video_id,
                 'user_id' => Auth::id(),
             ]);
 
             $this->info("Exercise '{$exercise->title}' created succesfully.");
+
             return 0;
         }
     }

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PasswordResetRequest;
-use Illuminate\Http\RedirectResponse;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 
@@ -28,7 +28,7 @@ class PasswordResetLinkController extends Controller
     {
         $user = User::where('email', $request->email)->first();
 
-        if (!$user) {
+        if (! $user) {
             return back()->withInput($request->only('email'))
                 ->withErrors(['email' => 'El correo electrónico no esta registrado.']);
         }

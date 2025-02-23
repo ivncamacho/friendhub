@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Workout;
 use App\Models\Exercise;
-use Illuminate\Database\Seeder;
+use App\Models\Workout;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Workout>

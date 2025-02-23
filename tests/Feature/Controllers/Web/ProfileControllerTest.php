@@ -59,7 +59,7 @@ it('does not update with invalid data', function () {
 it('deletes the user account', function () {
     $user = User::factory()->create();
 
-    $response = $this->actingAs($user)->delete("/profile/delete");
+    $response = $this->actingAs($user)->delete('/profile/delete');
 
     $response->assertRedirect(route('index'));
 
@@ -67,7 +67,6 @@ it('deletes the user account', function () {
 
     $this->assertDatabaseMissing('users', ['id' => $user->id]);
 });
-
 
 it('deletes the user profile image', function () {
     $user = User::factory()->create();
@@ -92,7 +91,6 @@ it('deletes the user profile image', function () {
     Storage::disk('public')->assertMissing($user->profile_photo);
 });
 
-
 it('returns an error if there is no profile photo to delete', function () {
     $user = User::factory()->create();
     $this->actingAs($user);
@@ -102,4 +100,3 @@ it('returns an error if there is no profile photo to delete', function () {
     $response->assertRedirect(route('dashboard'));
     $response->assertSessionHas('error', 'No se encontró ninguna foto de perfil para eliminar.');
 });
-

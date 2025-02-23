@@ -30,10 +30,11 @@ class WorkoutRequest extends FormRequest
             'exercises.*.reps' => 'required|integer|min:1',
         ];
     }
+
     public function messages()
     {
         return [
-          'title.required' => 'A title is required',
+            'title.required' => 'A title is required',
             'title.max' => 'The title must not exceed 255 characters',
             'exercises.required' => 'At least one exercise is required',
             'exercises.*.exercise_id.required' => 'An exercise is required',

@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Exercise;
-use App\Policies\ExercisePolicy;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 

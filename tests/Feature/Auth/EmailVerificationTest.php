@@ -5,8 +5,6 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 
 it('email verification screen can be rendered', function () {
     $user = User::factory()->unverified()->create();
@@ -94,7 +92,6 @@ it('sends verification email if the user is not verified', function () {
     $response->assertRedirect()->assertSessionHas('status', 'verification-link-sent');
 });
 
-
 it('redirects verified user to the dashboard with verified query param', function () {
     $user = User::factory()->create([
         'email_verified_at' => now(),
@@ -107,9 +104,5 @@ it('redirects verified user to the dashboard with verified query param', functio
 
     $response = $this->actingAs($user)->get($verificationUrl);
 
-    $response->assertRedirect(route('dashboard', absolute: false) . '?verified=1');
+    $response->assertRedirect(route('dashboard', absolute: false).'?verified=1');
 });
-
-
-
-

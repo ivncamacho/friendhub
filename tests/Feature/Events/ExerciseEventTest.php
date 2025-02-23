@@ -2,9 +2,9 @@
 
 use App\Events\ExercisePublished;
 use App\Models\Exercise;
-use Illuminate\Support\Facades\Event;
 use App\Models\User;
 use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Support\Facades\Event;
 
 it('should dispatch the ExercisePublished event when an exercise is created', function () {
     Event::fake();

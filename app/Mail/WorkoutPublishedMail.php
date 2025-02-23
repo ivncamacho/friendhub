@@ -2,10 +2,8 @@
 
 namespace App\Mail;
 
-use App\Models\Exercise;
 use App\Models\Workout;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -16,6 +14,7 @@ class WorkoutPublishedMail extends Mailable
     use Queueable, SerializesModels;
 
     public $workout;
+
     /**
      * Create a new message instance.
      */

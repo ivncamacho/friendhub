@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\ExercisePublished;
 use App\Mail\ExercisePublishedMail;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
 class SendExercisePublishedEmail
@@ -25,8 +23,7 @@ class SendExercisePublishedEmail
     {
         $recipient = auth()->user();
 
-            Mail::to($recipient->email)->send(new ExercisePublishedMail($event->exercise));
-
+        Mail::to($recipient->email)->send(new ExercisePublishedMail($event->exercise));
 
     }
 }
