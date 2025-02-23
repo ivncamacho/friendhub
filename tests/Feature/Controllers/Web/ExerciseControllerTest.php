@@ -86,22 +86,6 @@ it('stores an exercise with an image', function () {
     expect(file_exists($filePath))->toBeTrue();
 });
 
-it('returns a list of exercises for search', function () {
-    $user = User::factory()->create();
-    $exercise = Exercise::factory()->create(['title' => 'Push-up', 'user_id' => $user->id]);
-
-    $response = $this->get(route('search-workouts', ['q' => 'Push-up']));
-    $response->assertStatus(200);
-    $response->assertJsonFragment(['title' => 'Push-up']);
-});
-
-it('returns an empty array if no exercises match the search', function () {
-    $user = User::factory()->create();
-    $response = $this->get(route('search-workouts', ['q' => 'Nonexistent Exercise']));
-
-    $response->assertStatus(200);
-    $response->assertJson([]);
-});
 
 it('allows users to edit their own exercises', function () {
     $user = User::factory()->create();

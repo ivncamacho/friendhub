@@ -28,6 +28,10 @@ class ProfileController extends Controller
         $user->name = $validated['name'];
         $user->email = $validated['email'];
 
+        if ($request->hasFile('profile_photo')) {
+            $path = $request->file('profile_photo')->store('profile_photos');
+            $user->profile_photo = $path;
+        }
 
         if ($request->filled('password')) {
             $user->password = Hash::make($validated['password']);

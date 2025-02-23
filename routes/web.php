@@ -37,10 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/exercises', [ExerciseController::class, 'store'])->name('exercise.store');
 });
 
-
-Route::get('/search-workouts', [ExerciseController::class, 'search'])->name('search-workouts');
-
-
 Route::middleware('auth')->group(function () {
 
     Route::get('/workouts/{id}/edit', [WorkoutController::class, 'edit'])->name('workouts.edit');

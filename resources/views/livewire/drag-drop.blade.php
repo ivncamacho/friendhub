@@ -30,9 +30,9 @@
     @endif
 
     <!-- Botón para guardar -->
-    <button wire:click="save"
+    <button type="submit" wire:click="save"
             wire:loading.attr="disabled" wire:target="save"
             class="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 disabled:bg-gray-500">
-        {{ __('Save Image') }}
+        {{ __('Save Changes') }}
     </button>
 </div>

@@ -16,10 +16,8 @@ class ExerciseController extends Controller
     use AuthorizesRequests;
     public function index()
     {
-        // Obtén los ejercicios paginados de 12 en 12
         $exercises = Exercise::paginate(12);
 
-        // Pasa los ejercicios a la vista
         return view('famous-workouts', compact('exercises'));
     }
     public function show($id)
@@ -40,7 +38,7 @@ class ExerciseController extends Controller
             $file->move(public_path('assets/img/exercises'), $fileName);
         }
 
-        // Crear el ejercicio
+
         $exercise = Exercise::create([
             'title' => $request->title,
             'description' => $request->description,

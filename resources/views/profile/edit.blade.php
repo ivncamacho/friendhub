@@ -44,11 +44,7 @@
 
         @livewire('drag-drop')
 
-
-        <div class="mt-6 flex justify-between items-center">
-            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300">{{__('Save Changes')}}</button>
-
-
+        <div class="mt-6 justify-between items-center">
             <a href="{{ route('dashboard') }}" class="w-full bg-red-600 text-white py-3 rounded-lg text-center hover:bg-red-700 transition duration-300 ml-4">
                 {{__('Go Back')}}
             </a>
