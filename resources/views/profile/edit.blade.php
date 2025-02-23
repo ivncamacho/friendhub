@@ -44,7 +44,7 @@
 
         @livewire('drag-drop')
 
-        <div class="mt-6 justify-between items-center">
+        <div class="mt-4 flex justify-between items-center">
             <a href="{{ route('dashboard') }}" class="w-full bg-red-600 text-white py-3 rounded-lg text-center hover:bg-red-700 transition duration-300 ml-4">
                 {{__('Go Back')}}
             </a>

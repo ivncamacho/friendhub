@@ -32,7 +32,7 @@
     <!-- Botón para guardar -->
     <button type="submit" wire:click="save"
             wire:loading.attr="disabled" wire:target="save"
-            class="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 disabled:bg-gray-500">
+            class="mt-4 flex bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 disabled:bg-gray-500">
         {{ __('Save Changes') }}
     </button>
 </div>
